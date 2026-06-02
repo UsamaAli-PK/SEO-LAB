@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash install.sh)",
+      "Bash(py --version)",
+      "Bash(py -3 --version)",
+      "Bash(start:*)",
+      "WebFetch(domain:rmcsltd.com)",
+      "WebSearch",
+      "Skill(seo)",
+      "Skill(blog)",
+      "Skill(blog-*)",
+      "Skill(seo-*)",
+      "WebFetch(domain:aiautomationagencylondon.co.uk)",
+      "Bash(claude mcp:*)",
+      "Bash(CLAUDE_CODE_GIT_BASH_PATH=\"C:/Program Files/Git/bin/bash.exe\" claude mcp:*)",
+      "Bash(CLAUDE_CODE_GIT_BASH_PATH=\"/usr/bin/bash\" claude mcp:*)",
+      "mcp__fetch__get_markdown",
+      "Bash(node D:\\code\\seo\\.tools\\gsd-tools.cjs*)",
+      "Bash(node .tools\\gsd-tools.cjs*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:\\code\\seo\\.hooks\\gsd-prompt-guard.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:\\code\\seo\\.hooks\\gsd-context-monitor.js"
+          }
+        ]
+      }
+    ]
+  }
+}

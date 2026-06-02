@@ -1,0 +1,40 @@
+# Client audit output — stays local, never pushed
+Projects/
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.venv/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+*.swp
+*.swo
+
+# Secrets / credentials
+.env
+*.env
+google_credentials*.json
+service_account*.json
+credentials*.json
+
+# Playwright cache
+vendor/claude-seo/skills/seo/.venv/
+ms-playwright/
+
+# Temp
+*.tmp
+*.log
+tmp/

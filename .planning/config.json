@@ -1,0 +1,9 @@
+{
+  "commit_docs": false,
+  "context_window": 200000,
+  "project_code": "SEO-OPS",
+  "project_title": "SEO Operations Platform",
+  "workflow": {
+    "human_verify_mode": "end-of-phase"
+  }
+}

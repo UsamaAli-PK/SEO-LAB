@@ -1,0 +1,26 @@
+{
+  "claude-seo": {
+    "upstream": "https://github.com/AgriciDaniel/claude-seo.git",
+    "commit": "7676024",
+    "synced": "2026-06-03",
+    "branch": "main",
+    "copied": ["skills/", "agents/", "requirements.txt"]
+  },
+  "claude-blog": {
+    "upstream": "https://github.com/AgriciDaniel/claude-blog.git",
+    "commit": "49842ea",
+    "synced": "2026-06-03",
+    "branch": "main",
+    "copied": ["skills/", "agents/", "scripts/"]
+  },
+  "gsd-core-next": {
+    "upstream": "https://github.com/opengsd/gsd-core",
+    "version": "1.2.0",
+    "note": "Cherry-picked only — files committed directly to .hooks/ and .tools/",
+    "files_taken": [
+      "hooks/gsd-context-monitor.js -> .hooks/gsd-context-monitor.js",
+      "hooks/gsd-prompt-guard.js -> .hooks/gsd-prompt-guard.js",
+      "get-shit-done/bin/gsd-tools.cjs -> .tools/gsd-tools.cjs"
+    ]
+  }
+}
