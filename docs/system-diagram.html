@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Operations Platform — System Diagram</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 32px 24px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 36px;
+  }
+
+  /* ── LAYOUT ── */
+  .diagram {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── ROWS ── */
+  .row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    position: relative;
+  }
+  .row + .row { margin-top: 0; }
+
+  /* ── ARROW CONNECTOR (between rows) ── */
+  .arrow-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    position: relative;
+  }
+  .arrow-down {
+    width: 2px;
+    height: 28px;
+    background: #334155;
+    position: relative;
+  }
+  .arrow-down::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: -5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #334155;
+  }
+  .arrow-label {
+    position: absolute;
+    left: calc(50% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: #475569;
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    border-radius: 10px;
+    padding: 16px 18px;
+    flex: 1;
+    min-width: 0;
+    border: 1px solid transparent;
+  }
+
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .card-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+
+  /* colour themes */
+  .theme-user     { background: #1e293b; border-color: #334155; }
+  .theme-entry    { background: #1a2744; border-color: #2563eb; }
+  .theme-state    { background: #1c1e2e; border-color: #6366f1; }
+  .theme-seo      { background: #0f2723; border-color: #059669; }
+  .theme-blog     { background: #1f1520; border-color: #a855f7; }
+  .theme-agent    { background: #1a1f2e; border-color: #3b82f6; }
+  .theme-output   { background: #1f1a10; border-color: #f59e0b; }
+  .theme-safety   { background: #1c1010; border-color: #ef4444; }
+  .theme-update   { background: #0f1f2a; border-color: #22d3ee; }
+
+  .theme-entry .card-title   { color: #60a5fa; }
+  .theme-state .card-title   { color: #818cf8; }
+  .theme-seo .card-title     { color: #34d399; }
+  .theme-blog .card-title    { color: #c084fc; }
+  .theme-agent .card-title   { color: #60a5fa; }
+  .theme-output .card-title  { color: #fbbf24; }
+  .theme-safety .card-title  { color: #f87171; }
+  .theme-update .card-title  { color: #22d3ee; }
+  .theme-user .card-title    { color: #94a3b8; }
+
+  /* ── PILL TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .tag-green  { background: #064e3b; color: #6ee7b7; }
+  .tag-purple { background: #3b0764; color: #d8b4fe; }
+  .tag-blue   { background: #1e3a5f; color: #93c5fd; }
+  .tag-amber  { background: #451a03; color: #fde68a; }
+  .tag-red    { background: #450a0a; color: #fca5a5; }
+  .tag-cyan   { background: #0c2a30; color: #67e8f9; }
+  .tag-slate  { background: #1e293b; color: #94a3b8; }
+
+  /* ── PARALLEL AGENTS GRID ── */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .agent-chip {
+    background: #0f2723;
+    border: 1px solid #065f46;
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #6ee7b7;
+    font-weight: 600;
+  }
+  .agent-chip .agent-desc {
+    font-weight: 400;
+    color: #94a3b8;
+    font-size: 10px;
+    margin-top: 2px;
+  }
+  .blog-chip {
+    background: #1f1520;
+    border: 1px solid #7e22ce;
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #c084fc;
+    font-weight: 600;
+  }
+  .blog-chip .agent-desc {
+    font-weight: 400;
+    color: #94a3b8;
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #475569;
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px dashed #1e293b;
+    margin: 4px 0;
+  }
+
+  /* ── FLOW CONNECTOR BETWEEN CARDS ── */
+  .arrow-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #334155;
+    flex: 0 0 20px;
+    padding-top: 24px;
+  }
+
+  /* ── WIDE CARD ── */
+  .card-wide { flex: 2; }
+  .card-narrow { flex: 0.7; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #1e293b;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #64748b;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── CREDIT ── */
+  .credit {
+    text-align: center;
+    font-size: 11px;
+    color: #334155;
+    margin-top: 24px;
+  }
+  .credit a { color: #475569; text-decoration: none; }
+  .credit a:hover { color: #64748b; }
+</style>
+</head>
+<body>
+
+<div class="diagram">
+
+  <h1>SEO Operations Platform — System Flow</h1>
+  <p class="subtitle">Built by Usama Ali &nbsp;·&nbsp; github.com/usamaali/seo-ops</p>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 1 — ENTRY POINTS
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">① Entry — Who starts the work</div>
+  <div class="row">
+    <div class="card theme-user">
+      <div class="card-title">User</div>
+      <div class="card-label">You (Usama Ali)</div>
+      <div class="card-desc">Provides a client URL or keyword. Decides what to do next.</div>
+    </div>
+    <div class="arrow-right">→</div>
+    <div class="card theme-entry card-wide">
+      <div class="card-title">AI Agent</div>
+      <div class="card-label">Claude Code &nbsp;/&nbsp; Gemini CLI (Antigravity)</div>
+      <div class="card-desc">Opens <code>D:\code\seo</code>. Reads <strong>.planning/STATE.md</strong> first — finds current phase, status, and the <em>▶ Next Up</em> command to run.</div>
+      <div class="tags">
+        <span class="tag tag-blue">CLAUDE.md → Claude</span>
+        <span class="tag tag-purple">GEMINI.md → Gemini</span>
+        <span class="tag tag-slate">Shared STATE.md</span>
+      </div>
+    </div>
+    <div class="arrow-right">→</div>
+    <div class="card theme-state">
+      <div class="card-title">Session Safety</div>
+      <div class="card-label">.hooks (always active)</div>
+      <div class="card-desc">
+        <strong>Context monitor</strong> — fires warning at ≤35% context left<br><br>
+        <strong>Prompt guard</strong> — blocks injection on .planning/ writes
+      </div>
+      <div class="tags">
+        <span class="tag tag-red">PreToolUse</span>
+        <span class="tag tag-red">PostToolUse</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-down"></div>
+    <span class="arrow-label">Agent reads STATE.md → follows ▶ Next Up command</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 2 — TWO MAIN PATHS
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">② Two Main Workflows</div>
+  <div class="row">
+
+    <!-- PATH A -->
+    <div class="card theme-seo card-wide">
+      <div class="card-title">Path A — SEO Audit</div>
+      <div class="card-label">/seo audit &lt;url&gt;</div>
+      <div class="card-desc">Full parallel audit. 14 agents fire simultaneously. Each writes one raw .md file. Takes 3–8 minutes per site.</div>
+      <div class="tags">
+        <span class="tag tag-green">Phase 0: Brainstorm</span>
+        <span class="tag tag-green">Phase 1: Plan</span>
+        <span class="tag tag-green">Phase 2: 14 Parallel Agents</span>
+        <span class="tag tag-green">Phase 3: Review + Score</span>
+        <span class="tag tag-green">Phase 4: Fix Plan</span>
+        <span class="tag tag-green">Phase 5: Reports</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;font-size:13px;color:#334155;padding:0 8px;padding-top:16px;">OR</div>
+
+    <!-- PATH B -->
+    <div class="card theme-blog card-wide">
+      <div class="card-title">Path B — Content Pipeline</div>
+      <div class="card-label">/blog brand init → /seo write-blog &lt;keyword&gt;</div>
+      <div class="card-desc">Generates SEO-optimized blog articles from audit findings. 5 specialist agents collaborate. 5-gate quality contract enforced.</div>
+      <div class="tags">
+        <span class="tag tag-purple">Brand init</span>
+        <span class="tag tag-purple">Research</span>
+        <span class="tag tag-purple">Write</span>
+        <span class="tag tag-purple">Review (100pt)</span>
+        <span class="tag tag-purple">SEO check</span>
+        <span class="tag tag-purple">Render HTML+PDF</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-down"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 3 — PARALLEL AGENTS (SEO)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">③ Parallel Agents — SEO Audit (all run simultaneously)</div>
+  <div class="card theme-seo" style="padding: 16px 18px;">
+    <div class="card-title" style="margin-bottom:12px;">Tier A — Always Run (8 agents)</div>
+    <div class="agents-grid">
+      <div class="agent-chip">seo-technical<div class="agent-desc">Crawlability, redirects, canonicals, robots.txt</div></div>
+      <div class="agent-chip">seo-content<div class="agent-desc">E-E-A-T, thin content, readability</div></div>
+      <div class="agent-chip">seo-schema<div class="agent-desc">JSON-LD detection + generation</div></div>
+      <div class="agent-chip">seo-sitemap<div class="agent-desc">XML sitemap audit + build</div></div>
+      <div class="agent-chip">seo-geo<div class="agent-desc">AI Overviews / GEO optimization</div></div>
+      <div class="agent-chip">seo-performance<div class="agent-desc">Core Web Vitals (LCP, INP, CLS)</div></div>
+      <div class="agent-chip">seo-visual<div class="agent-desc">Screenshots, above-fold, UX</div></div>
+      <div class="agent-chip">seo-sxo<div class="agent-desc">Intent match, user stories, personas</div></div>
+    </div>
+    <hr class="divider" style="margin: 12px 0;">
+    <div class="card-title" style="margin-bottom:12px;">Tier B — MCP-powered (3 agents)</div>
+    <div class="agents-grid">
+      <div class="agent-chip">seo-google<div class="agent-desc">GSC, GA4, CrUX, PageSpeed</div></div>
+      <div class="agent-chip">seo-backlinks<div class="agent-desc">Moz, Bing, Common Crawl</div></div>
+      <div class="agent-chip">seo-dataforseo<div class="agent-desc">Live SERP data (if API key)</div></div>
+    </div>
+    <hr class="divider" style="margin: 12px 0;">
+    <div class="card-title" style="margin-bottom:12px;">Tier C — Conditional (3 agents, run if signals detected)</div>
+    <div class="agents-grid">
+      <div class="agent-chip">seo-local<div class="agent-desc">GBP, NAP, citations, reviews</div></div>
+      <div class="agent-chip">seo-maps<div class="agent-desc">Geo-grid, competitor radius</div></div>
+      <div class="agent-chip">seo-ecommerce<div class="agent-desc">Product schema, marketplace</div></div>
+      <div class="agent-chip">seo-cluster<div class="agent-desc">Always — hub-and-spoke topics</div></div>
+    </div>
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-down"></div>
+    <span class="arrow-label">Each agent writes raw/&lt;name&gt;.md · All finish → Phase 3 Review</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 4 — BLOG AGENTS
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">③ Specialist Agents — Blog Content (sequential collaboration)</div>
+  <div class="card theme-blog" style="padding: 16px 18px;">
+    <div class="agents-grid" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="blog-chip">blog-researcher<div class="agent-desc">Live stats, sources, Tier 1-3 quality</div></div>
+      <div class="blog-chip">blog-writer<div class="agent-desc">Answer-first format, E-E-A-T signals</div></div>
+      <div class="blog-chip">blog-reviewer<div class="agent-desc">100-point scoring, 5 categories</div></div>
+      <div class="blog-chip">blog-seo<div class="agent-desc">Title, meta, headings, schema</div></div>
+      <div class="blog-chip">blog-translator<div class="agent-desc">Multi-language delivery (optional)</div></div>
+    </div>
+    <hr class="divider" style="margin: 12px 0;">
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+      <span style="font-size:11px;color:#94a3b8;font-weight:600;">5-Gate Delivery Contract:</span>
+      <span class="tag tag-purple">Gate 1: Structure</span>
+      <span class="tag tag-purple">Gate 2: Prose+Lint</span>
+      <span class="tag tag-purple">Gate 3: Visual Audit</span>
+      <span class="tag tag-purple">Gate 4: SEO Check</span>
+      <span class="tag tag-purple">Gate 5: Score ≥90/100</span>
+    </div>
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-down"></div>
+    <span class="arrow-label">All gates pass → seo-verifier confirms goal-backward</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 5 — OUTPUT
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">④ Output — Everything lands in Projects/&lt;domain&gt;/</div>
+  <div class="row">
+
+    <div class="card theme-output">
+      <div class="card-title">SEO Audit Output</div>
+      <div class="card-label">Projects/centralgear-co-uk/</div>
+      <div class="card-desc">
+        raw/*.md — one per agent<br>
+        final/health-score.json<br>
+        final/fix-plan.md<br>
+        final/report.md<br>
+        final/client-audit-report.md<br>
+        final/client-audit-report.html ← interactive SPA
+      </div>
+      <div class="tags"><span class="tag tag-amber">Score 0-100</span><span class="tag tag-amber">Grade A-F</span></div>
+    </div>
+
+    <div class="arrow-right">+</div>
+
+    <div class="card theme-output">
+      <div class="card-title">Blog Content Output</div>
+      <div class="card-label">Projects/&lt;domain&gt;/final/blog/&lt;slug&gt;/</div>
+      <div class="card-desc">
+        &lt;slug&gt;.md — full article<br>
+        &lt;slug&gt;.html — rendered<br>
+        &lt;slug&gt;.pdf — printable<br>
+        hero.&lt;ext&gt; — featured image<br>
+        review.md — gate results<br>
+        preflight-report.json
+      </div>
+      <div class="tags"><span class="tag tag-amber">Score ≥90/100</span><span class="tag tag-amber">5 Gates Passed</span></div>
+    </div>
+
+    <div class="arrow-right">+</div>
+
+    <div class="card theme-output">
+      <div class="card-title">Strategy Output</div>
+      <div class="card-label">Projects/&lt;domain&gt;/final/</div>
+      <div class="card-desc">
+        content-calendar.md<br>
+        keyword-opportunity-map.md<br>
+        brand/BRAND.md<br>
+        brand/VOICE.md
+      </div>
+      <div class="tags"><span class="tag tag-amber">90-day plan</span><span class="tag tag-amber">Hub-and-spoke</span></div>
+    </div>
+
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-down"></div>
+    <span class="arrow-label">seo-verifier checks delivery → STATE.md updated with ▶ Next Up</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 6 — STATE HANDOFF
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">⑤ Handoff — Any agent picks up where any other left off</div>
+  <div class="row">
+
+    <div class="card theme-state">
+      <div class="card-title">Session End</div>
+      <div class="card-label">Agent updates STATE.md</div>
+      <div class="card-desc">
+        Sets <code>last_updated</code>, <code>last_agent</code>, <code>phase_status</code>.<br>
+        Writes new <strong>▶ Next Up</strong> block with exact command.
+      </div>
+      <div class="tags"><span class="tag tag-blue">Claude writes</span><span class="tag tag-purple">or Gemini writes</span></div>
+    </div>
+
+    <div class="arrow-right">→</div>
+
+    <div class="card theme-state card-wide">
+      <div class="card-title">.planning/STATE.md — The Shared Brain</div>
+      <div class="card-label">Any agent, any session, reads this first</div>
+      <div class="card-desc">
+        Machine-readable frontmatter: <code>current_phase · phase_status · active_plan · blocked</code><br><br>
+        Human-readable prose: what was done, what exists, what's next.<br><br>
+        <strong>▶ Next Up block</strong> = exact command to copy-paste.
+      </div>
+      <div class="tags">
+        <span class="tag tag-blue">Claude reads it</span>
+        <span class="tag tag-purple">Gemini reads it</span>
+        <span class="tag tag-slate">Future agents read it</span>
+      </div>
+    </div>
+
+    <div class="arrow-right">→</div>
+
+    <div class="card theme-state">
+      <div class="card-title">Session Start</div>
+      <div class="card-label">Next agent resumes</div>
+      <div class="card-desc">
+        Reads STATE.md → finds ▶ Next Up → runs exact command → continues where previous agent stopped.
+      </div>
+      <div class="tags"><span class="tag tag-blue">Same agent</span><span class="tag tag-purple">or different agent</span></div>
+    </div>
+
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-down"></div>
+    <span class="arrow-label">Upstreams ship new versions → run update.ps1</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROW 7 — MAINTENANCE
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">⑥ Maintenance — Keeping the platform current</div>
+  <div class="row">
+
+    <div class="card theme-update">
+      <div class="card-title">.\update.ps1</div>
+      <div class="card-label">Sync upstream skills</div>
+      <div class="card-desc">
+        Sparse-clones AgriciDaniel/claude-seo and AgriciDaniel/claude-blog.<br>
+        Copies only skills/, agents/, scripts/.<br>
+        Updates vendor.json with new commit hashes.<br>
+        <strong>Never touches your files.</strong>
+      </div>
+      <div class="tags"><span class="tag tag-cyan">vendor/claude-seo/</span><span class="tag tag-cyan">vendor/claude-blog/</span></div>
+    </div>
+
+    <div class="arrow-right">+</div>
+
+    <div class="card theme-update">
+      <div class="card-title">.\install.ps1</div>
+      <div class="card-label">New machine setup (one command)</div>
+      <div class="card-desc">
+        Checks Python 3.10+ / Node 18+ / Git.<br>
+        Creates venv + installs requirements.<br>
+        Installs Playwright chromium.<br>
+        Verifies .tools/gsd-tools.cjs.<br>
+        <strong>Idempotent</strong> — safe to re-run.
+      </div>
+      <div class="tags"><span class="tag tag-cyan">Python venv</span><span class="tag tag-cyan">Playwright</span><span class="tag tag-cyan">Node check</span></div>
+    </div>
+
+    <div class="arrow-right">+</div>
+
+    <div class="card theme-update">
+      <div class="card-title">git push</div>
+      <div class="card-label">github.com/usamaali/seo-ops</div>
+      <div class="card-desc">
+        Your platform layer: CLAUDE.md, GEMINI.md, .planning/, .hooks/, .agents/, install.ps1, update.ps1.<br><br>
+        Others clone + run install.ps1 to get a working system instantly.
+      </div>
+      <div class="tags"><span class="tag tag-cyan">Public repo</span><span class="tag tag-cyan">MIT license</span></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       LEGEND
+  ═══════════════════════════════════════════════════════ -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>Agent / AI tool</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div>State system (.planning/)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#059669"></div>SEO audit engine</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div>Blog content engine</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Deliverable / output</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Safety hooks</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div>Maintenance / update</div>
+  </div>
+
+  <p class="credit">
+    Platform by <a href="https://www.linkedin.com/in/usamaalipk/" target="_blank">Usama Ali</a> &nbsp;·&nbsp;
+    Skills: <a href="https://github.com/AgriciDaniel/claude-seo" target="_blank">AgriciDaniel/claude-seo</a> +
+    <a href="https://github.com/AgriciDaniel/claude-blog" target="_blank">AgriciDaniel/claude-blog</a> &nbsp;·&nbsp;
+    Hooks: <a href="https://github.com/opengsd/gsd-core" target="_blank">opengsd/gsd-core</a>
+  </p>
+
+</div>
+</body>
+</html>
