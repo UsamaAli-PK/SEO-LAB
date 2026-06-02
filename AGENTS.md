@@ -201,65 +201,400 @@ Write three files in `final/`:
 
 ## 6. Content Creation Workflow (Option 2)
 
-When user picks Option 2 and provides a topic/keyword:
+Full skill reference: `vendor/claude-blog/skills/blog/SKILL.md` (orchestrator)
+and `vendor/claude-blog/skills/blog-write/SKILL.md` (writing detail).
 
-1. **Brand check** — does `Projects/<domain>/brand/BRAND.md` exist?
-   If not, ask the user 5 quick questions to create it:
-   - What is the business name and what does it do?
-   - Who is the target audience?
-   - What tone? (professional / friendly / technical / conversational)
-   - Any words or phrases to always avoid?
-   - Any competitor sites to be aware of?
+### Step 1 — Brand Context (always do this first)
 
-2. **Research** — use available web search tools to find:
-   - Top 5 ranking pages for the keyword
-   - PAA questions (People Also Ask)
-   - Related keywords and search intent
-   - Any recent statistics or data worth citing
+Check if `Projects/<domain>/brand/BRAND.md` and `VOICE.md` exist.
 
-3. **Write** — produce the article following:
-   - Answer-first structure (answer in first 100 words)
-   - Proper heading hierarchy (H1 → H2 → H3)
-   - E-E-A-T signals (cite sources, show expertise)
-   - Target word count based on top-ranking competitors
-   - Internal linking opportunities from existing content
+**If they do not exist**, run the brand init interview before writing anything.
+Ask these questions one at a time, wait for answers:
 
-4. **5-Gate quality check** (run analyze_blog.py if Python available):
-   - Gate 1: Structure (headings, intro, conclusion, meta)
-   - Gate 2: Prose (no AI slop patterns, readability score)
-   - Gate 3: Visual (alt text, image placeholders)
-   - Gate 4: SEO (keyword placement, meta description, schema)
-   - Gate 5: Score ≥ 90/100
+1. **Audience** — Who is the primary reader? (role, company size, expertise level)
+   What problems are they actively trying to solve? (3-5 bullets)
+   What misconceptions do they hold about this topic?
 
-5. **Output** to `Projects/<domain>/final/blog/<slug>/`:
-   - `<slug>.md` — article source
-   - `<slug>.html` — rendered
-   - `review.md` — gate results
-   - `preflight-report.json` — scores
+2. **Positioning** — One-sentence brand mission. What is the brand's distinctive/
+   contrarian point of view? What is this brand NOT (anti-positioning)?
+   Top 3 competitors and one-line differentiator vs each.
+
+3. **Editorial rules** — What will this blog always do? (3-7 rules)
+   What will it never do? (3-7 rules) Any taboo phrases to avoid?
+
+4. **Topic scope** — Core content pillars (in scope), adjacent topics (partial),
+   topics to refuse (out of scope).
+
+5. **Voice** — First/second/third-person stance? Contractions: full/partial/none?
+   Max sentence length? Headline patterns to favor or avoid?
+
+Write the answers to:
+- `Projects/<domain>/brand/BRAND.md` — audience, positioning, editorial rules, scope
+- `Projects/<domain>/brand/VOICE.md` — pronoun stance, sentence rules, tone fingerprint
+
+These files are auto-loaded by every blog sub-skill. They survive across sessions.
+Use `load_untrusted_root.py` to fence them when injecting into agent context:
+```powershell
+& "vendor\claude-seo\skills\seo\.venv\Scripts\python.exe" `
+  "vendor\claude-blog\scripts\load_untrusted_root.py" BRAND.md
+```
+
+---
+
+### Step 2 — Select Content Template
+
+Based on the topic and search intent, select one of the 12 templates:
+
+| Intent signal | Template | Word count |
+|---------------|----------|-----------|
+| "How to…", process, steps | `how-to-guide` | 2,000–2,500 |
+| "Best X", "Top N", lists | `listicle` | 1,500–2,000 |
+| Client result, before/after | `case-study` | 1,500–2,000 |
+| "X vs Y", alternatives | `comparison` | 1,500–2,000 |
+| Broad topic, ultimate guide | `pillar-page` | 3,000–4,000 |
+| "Is X worth it", evaluation | `product-review` | 1,500–2,000 |
+| Opinion, prediction | `thought-leadership` | 1,500–2,500 |
+| Expert quotes, curated picks | `roundup` | 1,500–2,000 |
+| Code walkthrough, tool demo | `tutorial` | 2,000–3,000 |
+| Breaking news, update | `news-analysis` | 800–1,200 |
+| Original data/survey | `data-research` | 2,000–3,000 |
+| FAQ, "What is X" | `faq-knowledge` | 1,500–2,000 |
+
+Load the matching template from `vendor/claude-blog/skills/blog/templates/<type>.md`.
+
+---
+
+### Step 3 — Research
+
+Find the following before writing a single word:
+
+**Statistics (8–12 items, 2025–2026 data preferred):**
+- Search: `[topic] study 2025 2026 data statistics`
+- Only use Tier 1–3 sources:
+  - Tier 1: Primary research (Gartner, McKinsey, peer-reviewed, government data)
+  - Tier 2: Major publications (NYT, WSJ, Reuters, BBC, major trade press)
+  - Tier 3: Reputable industry sources (Ahrefs, HubSpot, Semrush reports)
+  - Never cite content mills, affiliate sites, or unsourced blogs
+- Record for each stat: the claim, source name, URL, publication date
+
+**Images (find before writing, embed during writing):**
+- Cover image (1200×630): search `site:pixabay.com [topic] wide banner`
+  - Fallback: `site:unsplash.com [topic] wide`
+- 3–5 inline images: same sources
+- Verify URLs return HTTP 200
+
+**Data for charts (2–4 charts per post):**
+- Identify chart-worthy data: 3+ comparable metrics, trend data, before/after
+- Vary chart types per post — no two charts the same type
+- Charts are built as inline SVG via the blog-chart sub-skill
+
+**YouTube videos (2–3 per post):**
+- Search: `site:youtube.com [topic] [year]`
+- Select only high-quality, relevant, recent videos
+
+---
+
+### Step 4 — Build Outline
+
+Create the outline before writing. Show it to the user and ask for approval.
+
+Structure every article with:
+```
+# [Title as Question — include primary keyword]
+
+## Introduction (100–150 words)
+- Hook with a surprising statistic
+- Problem/opportunity statement
+- What the reader will learn
+
+> **Key Takeaways**
+> - [Core finding with statistic + source]
+> - [Second insight or recommendation]
+> - [Third actionable takeaway]
+> (3–5 bullets, 40–60 words combined)
+
+## H2: [Question format] (300–400 words)
+- Answer-first paragraph (40–60 words with stat + source)
+- Supporting evidence + [IMAGE]
+- [CHART: type + data description]
+- [CITATION CAPSULE: 40–60 word self-contained quotable passage]
+- [INTERNAL-LINK: anchor text → target description]
+
+[Repeat for 4–6 H2 sections]
+
+## [CTA Section]
+- Single focused CTA after value delivery (never at top)
+
+## FAQ (3–5 questions, 40–60 word answers each, each with a statistic)
+
+## Conclusion (100–150 words)
+- Key takeaways (bulleted)
+- [INTERNAL-LINK: next logical content]
+```
+
+---
+
+### Step 5 — Write the Article
+
+**Every H2 section MUST open with a 40–60 word answer-first paragraph:**
+```
+## How Does X Impact Y in 2026?
+
+In 2026, [Publisher] found that [statistic] ([Publisher Name], [Title], [URL]).
+[Direct answer to the heading question in 1–2 more sentences.]
+```
+
+**FLOW evidence triple — enforce at drafting time, not just audit:**
+Every statistic must have all three:
+1. **Year anchor in the sentence body** — "In 2026," or "As of Q1 2026," before the stat. Not buried in parentheses.
+2. **Inline citation** — name both publisher AND document title: "Ahrefs, AI Overviews CTR Update, December 2025"
+3. **Full URL + retrieval date** in a Sources section at the bottom
+
+**Citation capsules** — for each major H2 section, one 40–60 word self-contained
+quotable passage. Must make sense in isolation. Designed for AI systems to cite directly.
+
+**Information gain markers** — minimum 2–3 per article:
+- `[ORIGINAL DATA]` — first-hand data, surveys, experiments
+- `[PERSONAL EXPERIENCE]` — direct observations, "when we tried X"
+- `[UNIQUE INSIGHT]` — analysis others haven't made
+
+**Anti-AI phrase ban** — never use these:
+"in today's digital landscape", "it's important to note", "dive into",
+"game-changer", "navigate the landscape", "revolutionize", "seamlessly",
+"cutting-edge", "harness the power of", "leverage" (as verb), "delve",
+"crucial", "elevate", "foster", "multifaceted", "robust", "tapestry", "embark"
+
+**Sentence variety** — mix short (8-word) and long (25-word) sentences.
+Uniform length is the #1 AI-authorship signal. Use contractions naturally.
+Add at least one rhetorical question every 200–300 words.
+
+**Hard limits:**
+- Never exceed 150 words per paragraph
+- Never exceed 15–20 words per sentence
+- Never skip heading levels (H1 → H2 → H3 only)
+- Never fabricate a statistic — if you can't verify it, drop it
+
+---
+
+### Step 6 — Quality Scoring (100 points across 5 categories)
+
+| Category | Weight | What it measures |
+|----------|--------|-----------------|
+| Content Quality | 30 pts | Depth, Flesch 60–70 readability, originality, structure, grammar |
+| SEO Optimization | 25 pts | Heading hierarchy, title tag (50–60 chars), keyword placement, meta (150–160 chars) |
+| E-E-A-T Signals | 15 pts | Author attribution, source citations, trust indicators |
+| Technical Elements | 15 pts | Schema markup, image alt text, OG meta tags |
+| AI Citation Readiness | 15 pts | Passage citability, Q&A format, entity clarity |
+
+**Scoring bands:**
+- 90–100: Publish as-is
+- 80–89: Minor polish needed
+- 70–79: Targeted improvements required
+- < 70: Rewrite
+
+Run the scoring script if Python is available:
+```powershell
+& "vendor\claude-seo\skills\seo\.venv\Scripts\python.exe" `
+  "vendor\claude-blog\scripts\analyze_blog.py" `
+  "Projects\<domain>\final\blog\<slug>\<slug>.md"
+```
+
+---
+
+### Step 7 — 5-Gate Delivery Contract
+
+The user is NEVER the first reviewer. The gates are. Do not deliver the
+article until all 5 pass. If any gate fails, loop back to fix it (max 3 tries).
+On the 3rd failure, stop and show the failure diagnostic instead of the article.
+
+| Gate | Checks |
+|------|--------|
+| Gate 1: Pre-flight | Structure valid, no [PLACEHOLDER] text left, headings present, frontmatter complete |
+| Gate 2: Prose & Linting | No banned AI phrases, sentence length variance passes, contractions present, readability Flesch 60–70 |
+| Gate 3: Visual Audit | All images have descriptive alt text, no broken image URLs, charts have figcaptions |
+| Gate 4: SEO Check | Title 50–60 chars, meta description 150–160 chars with stat, keyword in H1 + 2–3 H2s, OG tags present |
+| Gate 5: Quality Score | Overall score ≥ 90/100 from the 5-category rubric, zero P0 issues |
+
+Run the preflight script after writing:
+```powershell
+& "vendor\claude-seo\skills\seo\.venv\Scripts\python.exe" `
+  "vendor\claude-blog\scripts\blog_preflight.py" `
+  --draft "Projects\<domain>\final\blog\<slug>" --strict
+```
+
+---
+
+### Step 8 — Render and Deliver
+
+Render the final article to HTML and PDF:
+```powershell
+& "vendor\claude-seo\skills\seo\.venv\Scripts\python.exe" `
+  "vendor\claude-blog\scripts\blog_render.py" `
+  --md "Projects\<domain>\final\blog\<slug>\<slug>.md" `
+  --out-dir "Projects\<domain>\final\blog\<slug>"
+```
+
+**Output files in `Projects/<domain>/final/blog/<slug>/`:**
+- `<slug>.md` — full article with frontmatter
+- `<slug>.html` — rendered HTML
+- `<slug>.pdf` — printable (if WeasyPrint available in venv)
+- `hero.<ext>` — cover image
+- `review.md` — gate-by-gate results with BLOCKING: true/false
+- `preflight-report.json` — machine-readable scores
+
+**After successful delivery, show this footer in the terminal:**
+```
+Report & Content by: USAMA ALI
+🔗 LinkedIn → https://www.linkedin.com/in/usamaalipk/
+```
+
+---
+
+### All 30 Blog Sub-Skills Available
+
+Read the full orchestrator at `vendor/claude-blog/skills/blog/SKILL.md` for
+routing logic. Sub-skills you can invoke for specific tasks:
+
+| Sub-skill | What it does |
+|-----------|-------------|
+| `blog-write` | Write new articles from scratch (this workflow) |
+| `blog-rewrite` | Optimize/update existing posts |
+| `blog-analyze` | 100-point quality audit of any existing post |
+| `blog-brief` | Generate a content brief before writing |
+| `blog-outline` | SERP-informed outline with competitive gaps |
+| `blog-seo-check` | Post-writing SEO validation checklist |
+| `blog-schema` | Generate JSON-LD schema (BlogPosting, FAQ, Person) |
+| `blog-geo` | AI citation readiness audit (0–100 GEO score) |
+| `blog-factcheck` | Verify every statistic against its cited source |
+| `blog-repurpose` | Repurpose post for social, email, YouTube, Reddit |
+| `blog-audit` | Full-site blog health check across all posts |
+| `blog-cannibalization` | Detect keyword overlap between posts |
+| `blog-persona` | Manage writing personas and voice profiles |
+| `blog-brand` | Generate/update BRAND.md + VOICE.md |
+| `blog-discourse` | Research what people are saying about a topic (last 30 days, API-free) |
+| `blog-taxonomy` | Tag/category management for WordPress, Ghost, etc. |
+| `blog-image` | AI image generation via Gemini (requires nanobanana-mcp) |
+| `blog-audio` | Generate audio narration of blog posts (requires Google AI API key) |
+| `blog-google` | Google API data: PSI, CrUX, GSC, GA4, YouTube, Keywords |
+| `blog-notebooklm` | Query NotebookLM for source-grounded research |
+| `blog-flow` | FLOW framework prompts (find, optimize, win, sync) |
+| `blog-multilingual` | Write + translate + localize in one command |
+| `blog-translate` | SEO-optimized translation with format preservation |
+| `blog-localize` | Cultural deep-adaptation (DACH, FR, ES, JA, custom) |
+| `blog-locale-audit` | Multilingual content QA (hreflang, parity, freshness) |
+| `blog-chart` | Internal — generates inline SVG charts (called by blog-write) |
+
+To invoke a sub-skill, read its SKILL.md from `vendor/claude-blog/skills/<name>/SKILL.md`
+and follow the workflow defined there.
 
 ---
 
 ## 7. Content Strategy Workflow (Option 3)
 
-When user picks Option 3:
+Full skill references:
+- `vendor/claude-blog/skills/blog-strategy/SKILL.md` — positioning + topic architecture
+- `vendor/claude-blog/skills/blog-cluster/SKILL.md` — semantic cluster planning + execution
+- `vendor/claude-blog/skills/blog-calendar/SKILL.md` — editorial calendar with decay detection
 
-1. Ask: "Do you have an existing audit for this site, or shall I start fresh with keyword research?"
+---
 
-2. **If audit exists** — read `Projects/<domain>/final/health-score.json` and `fix-plan.md` to identify content gaps
+### Step 1 — Discovery Questions
 
-3. **Cluster plan** — group keywords into hub-and-spoke topics:
-   - 1 pillar page per topic cluster
-   - 4-6 supporting articles per pillar
-   - Internal linking map between them
+Ask the user (wait for each answer):
+1. What does the business do and who are the customers?
+2. Blog goals: traffic / leads / authority / AI citations?
+3. Is there existing blog content? (scan `Projects/<domain>/final/blog/` if present)
+4. Do you have a completed SEO audit? (check `Projects/<domain>/final/health-score.json`)
+5. Who are 3–5 main competitors?
+6. What unique expertise or data does this brand have?
+7. Publishing capacity: how many posts per week?
 
-4. **Calendar** — assign articles to weeks using this mix:
-   - 60% — informational (builds authority)
-   - 30% — commercial (drives conversions)
-   - 10% — news/trending (captures fresh traffic)
+---
 
-5. **Output** to `Projects/<domain>/final/`:
-   - `content-calendar.md` — 90-day editorial calendar
-   - `keyword-opportunity-map.md` — full keyword table with intent, volume estimates, difficulty
+### Step 2 — Competitive Landscape (if web search available)
+
+For each competitor:
+- Identify their top-traffic content (use web search: `site:<competitor> [topic]`)
+- Find keyword gaps — topics they rank for that this brand doesn't cover
+- Find angle gaps — topics covered but with weak depth, outdated data, or no original research
+
+---
+
+### Step 3 — Content Gap Analysis (if SEO audit exists)
+
+Read `Projects/<domain>/final/health-score.json` and `fix-plan.md`.
+Map low-scoring content areas to content opportunities:
+- Low GEO score → create AI-citation-optimized FAQ and definition articles
+- Thin content findings → identify which pages need supporting cluster articles
+- Missing schema → identify pages needing FAQ and how-to content
+
+---
+
+### Step 4 — Build Topic Clusters (hub-and-spoke)
+
+Design 3–5 topic clusters. Each cluster:
+
+```
+Cluster: [Primary keyword theme]
+├── Pillar Page (3,000+ words) — comprehensive authority guide
+├── Supporting Article 1 (2,000 words) — deep dive on subtopic
+├── Supporting Article 2 (2,000 words) — deep dive on subtopic
+├── Supporting Article 3 (1,500 words) — use case / case study
+├── Comparison Article (1,500 words) — X vs Y
+└── FAQ Article (1,500 words) — common questions answered
+```
+
+Rules:
+- Every article in a cluster links to the pillar page
+- The pillar page links back to every supporting article
+- No two articles in the same cluster target the same keyword
+
+For semantic SERP-based clustering, read and follow:
+`vendor/claude-blog/skills/blog-cluster/SKILL.md`
+
+---
+
+### Step 5 — Content Decay Detection
+
+Check for existing posts that are losing rankings:
+- Posts not updated in > 6 months with statistics are decaying
+- Posts with statistics from 2023 or earlier need freshness updates
+- Mark these as priority "update" tasks in the calendar
+
+---
+
+### Step 6 — Build the Editorial Calendar
+
+Assign articles to weeks using this content mix:
+- **60% Informational** — builds topical authority and AI citation surface
+- **30% Commercial** — drives conversions (comparisons, reviews, case studies)
+- **10% News/Trending** — captures fresh traffic from algorithm updates, news
+
+Calendar format per week:
+```
+Week N (Date range):
+- [Publish NEW] Article title — template type — target keyword — cluster
+- [UPDATE] Existing article title — what needs updating
+```
+
+Include:
+- Seasonal hooks relevant to the niche
+- Publishing sequence: pillar first, then supporting articles
+- Freshness update schedule: which posts need statistics refreshed and when
+
+---
+
+### Step 7 — Output
+
+Write to `Projects/<domain>/final/`:
+- `content-calendar.md` — 90-day week-by-week editorial calendar
+- `keyword-opportunity-map.md` — full keyword table:
+
+| Keyword | Monthly Volume (est.) | Difficulty | Intent | Cluster | Template | Priority |
+|---------|----------------------|------------|--------|---------|----------|---------|
+| ... | ... | ... | Info/Commercial/Nav | ... | ... | High/Med/Low |
+
+Volume and difficulty are estimates from web search unless DataForSEO MCP is active.
 
 ---
 
