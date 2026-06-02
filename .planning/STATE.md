@@ -2,7 +2,7 @@
 project: SEO Operations Platform
 project_code: SEO-OPS
 last_updated: 2026-06-03
-last_agent: claude-sonnet-4-6
+last_agent: claude-opus-4-8
 current_phase: 3
 current_phase_name: content-pipeline
 phase_status: in_progress
@@ -29,10 +29,22 @@ to resume work.
 | `vendor/claude-blog/` | 30 blog skills, 5 agents, 9 scripts |
 | `gsd-core-next/` | Reference only — do not edit |
 | `.planning/` | State, roadmap, phase plans/summaries |
+| `.platform/` | KERNEL: workflows/, scripts/, model-policy.md, contracts.md |
 | `.hooks/` | gsd-context-monitor.js, gsd-prompt-guard.js |
 | `.tools/` | gsd-tools.cjs (slug, timestamp utilities) |
 | `.agents/` | seo-verifier.md |
-| `Projects/` | Client audit output (gitignored) |
+| `Projects/` | Client audit output (gitignored), `_learnings/learnings.jsonl` |
+
+## Platform Kernel (added 2026-06-03, Phase 6)
+
+The architecture hardening that took the stress-test ratings to A-tier:
+- **Router**: `AGENTS.md` is now 159 lines (was 705). Loads ONE workflow on demand.
+- **Workflows**: `.platform/workflows/{audit,content,strategy,resume}.md`
+- **Scripts**: `.platform/scripts/` — `fetch_cache.py` (fetch once),
+  `collect_findings.py` (frontmatter summaries not bodies),
+  `audit_preflight.py` (validation gate), `learn.py` (cross-client JSONL memory)
+- **Policy**: `.platform/model-policy.md` (budget/quality tiering),
+  `.platform/contracts.md` (artifact handoff contracts)
 
 ## Phase Status
 
@@ -43,6 +55,7 @@ to resume work.
 | 3 | Content Pipeline | 🔄 IN PROGRESS | Wire blog skills, brand init, first article |
 | 4 | GSD Optimization | 📋 PLANNED | Hooks wired, verifier, tools tested |
 | 5 | GitHub Repo | ✅ DONE | install.ps1, update.ps1, README, vendor.json |
+| 6 | Architecture Hardening | ✅ DONE | Kernel: router, workflows, scripts, policy, contracts |
 
 ## Active Work
 
@@ -52,16 +65,14 @@ Phase 3: Wire blog sub-skills so `/blog write`, `/blog calendar`,
 
 ## ▶ Next Up — [SEO-OPS] SEO Operations Platform
 
-**Phase 3: Content Pipeline** — Init brand voice then generate first blog article
+**Phase 3: Content Pipeline** — resume at first unchecked task in the PLAN
 
-`/clear` then:
-
-`/blog brand init`
-
-**After brand init completes, run:**
-`/seo write-blog "DSG gearbox warning signs"`
+`/clear` then read `.planning/phases/03-content-pipeline/PLAN.md` and resume
+at task 3.1 (the first unchecked `- [ ]`). The kernel is now in place, so:
+- Fetch pages via `python .platform/scripts/fetch_cache.py`
+- Follow `.platform/workflows/content.md` for the blog build
+- Apply model tiering from `.platform/model-policy.md`
 
 **Also available:**
-- `/seo content-plan centralgear.co.uk` — full content calendar
-- `/seo audit <url>` — audit a new client site
-- Review `.planning/phases/03-content-pipeline/PLAN.md` for full task list
+- `/seo audit <url>` — audit a new client (follows `.platform/workflows/audit.md`)
+- Review `.planning/phases/06-architecture-hardening/SUMMARY.md` for what just shipped
