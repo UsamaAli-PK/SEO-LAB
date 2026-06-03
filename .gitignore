@@ -1,6 +1,9 @@
 # Client audit output — stays local, never pushed
 Projects/
 
+# Superseded clones + reference repos — local only, safe to delete
+deletable/
+
 # Python
 **/__pycache__/
 **/*.pyc

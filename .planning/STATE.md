@@ -15,11 +15,11 @@ blocked_reason: null
 
 ## What This Project Is
 
-A self-contained SEO operations platform at `D:\code\seo\` (local) /
-`github.com/usamaali/seo-ops` (remote). All source repos, agents, skills,
-scripts, hooks, and project output live here. No global `~/.claude/`
-dependency. Any AI agent (Claude, Gemini, future) reads this file first
-to resume work.
+A self-contained, portable SEO operations platform. The repo root is wherever
+this folder is cloned — all paths in the system are relative to it, nothing is
+hardcoded. All vendored skills, agents, scripts, hooks, and project output live
+inside the repo. No global `~/.claude/` dependency. Any AI agent (Claude,
+Gemini, future) reads this file first to resume work.
 
 ## Repo Layout
 
@@ -27,7 +27,7 @@ to resume work.
 |------|---------|
 | `vendor/claude-seo/` | 25 SEO skills, 18 agents, 30+ Python scripts |
 | `vendor/claude-blog/` | 30 blog skills, 5 agents, 9 scripts |
-| `gsd-core-next/` | Reference only — do not edit |
+| `deletable/` | Superseded clones + reference repos — safe to delete |
 | `.planning/` | State, roadmap, phase plans/summaries |
 | `.platform/` | KERNEL: workflows/, scripts/, model-policy.md, contracts.md |
 | `.hooks/` | gsd-context-monitor.js, gsd-prompt-guard.js |

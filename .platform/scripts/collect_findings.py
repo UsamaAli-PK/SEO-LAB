@@ -15,7 +15,11 @@ import json
 import os
 import sys
 
-PROJECTS_ROOT = r"D:\code\seo\Projects"
+# Repo root derived from this file's location (.platform/scripts/) — no hardcoded paths.
+PROJECTS_ROOT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    "Projects",
+)
 
 
 def parse_frontmatter(path: str) -> dict | None:

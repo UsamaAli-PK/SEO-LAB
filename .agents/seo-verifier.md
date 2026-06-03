@@ -27,10 +27,13 @@ For a delivery at `Projects\<domain>\final\blog\<slug>\` to be COMPLETE:
 
 ## Step 1: Locate delivery
 
+Run all commands from the repository root (the folder containing `AGENTS.md`).
+Paths are relative — never hardcode an absolute location.
+
 ```powershell
 $slug = "<slug-to-verify>"
 $domain = "<domain-slug>"
-$base = "D:\code\seo\Projects\$domain\final\blog\$slug"
+$base = "Projects\$domain\final\blog\$slug"
 Get-ChildItem $base -ErrorAction SilentlyContinue | Select-Object Name, Length
 ```
 
@@ -55,7 +58,7 @@ $pf.overall_score
 Get-ChildItem $base | Where-Object { $_.Name -match "^hero\." }
 
 # Brand voice
-Test-Path "D:\code\seo\Projects\$domain\brand\BRAND.md"
+Test-Path "Projects\$domain\brand\BRAND.md"
 ```
 
 ## Step 3: Parse review.md

@@ -16,7 +16,7 @@
       "Bash(CLAUDE_CODE_GIT_BASH_PATH=\"C:/Program Files/Git/bin/bash.exe\" claude mcp:*)",
       "Bash(CLAUDE_CODE_GIT_BASH_PATH=\"/usr/bin/bash\" claude mcp:*)",
       "mcp__fetch__get_markdown",
-      "Bash(node D:\\code\\seo\\.tools\\gsd-tools.cjs*)",
+      "Bash(node .tools/gsd-tools.cjs*)",
       "Bash(node .tools\\gsd-tools.cjs*)"
     ]
   },
@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node D:\\code\\seo\\.hooks\\gsd-prompt-guard.js"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.hooks/gsd-prompt-guard.js\""
           }
         ]
       }
@@ -38,7 +38,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node D:\\code\\seo\\.hooks\\gsd-context-monitor.js"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.hooks/gsd-context-monitor.js\""
           }
         ]
       }

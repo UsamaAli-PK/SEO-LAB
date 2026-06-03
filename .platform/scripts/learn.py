@@ -16,7 +16,9 @@ import os
 import sys
 from datetime import datetime, timezone
 
-STORE_DIR = r"D:\code\seo\Projects\_learnings"
+# Repo root derived from this file's location (.platform/scripts/learn.py) — no hardcoded paths.
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+STORE_DIR = os.path.join(_REPO_ROOT, "Projects", "_learnings")
 STORE_PATH = os.path.join(STORE_DIR, "learnings.jsonl")
 
 

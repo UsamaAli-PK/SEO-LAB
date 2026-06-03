@@ -17,7 +17,11 @@ import sys
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
-PROJECTS_ROOT = r"D:\code\seo\Projects"
+# Repo root derived from this file's location (.platform/scripts/) — no hardcoded paths.
+PROJECTS_ROOT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    "Projects",
+)
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
