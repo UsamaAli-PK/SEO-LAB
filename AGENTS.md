@@ -125,7 +125,7 @@ Do not load a workflow file until the user has chosen. This keeps context lean.
 ## 6. Output Folder Convention
 
 Domain slug = hostname, dots → hyphens, no www, lowercase.
-Example: `https://www.CentralGear.co.uk/` → `centralgear-co-uk`
+Example: `https://www.Example.co.uk/` → `example-co-uk`
 
 Everything lives under `Projects/<domain-slug>/`:
 - `cache/` — single homepage snapshot, fetched once per audit

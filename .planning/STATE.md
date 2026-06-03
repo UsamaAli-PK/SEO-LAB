@@ -50,7 +50,7 @@ The architecture hardening that took the stress-test ratings to A-tier:
 
 | # | Phase | Status | Key Output |
 |---|-------|--------|------------|
-| 1 | SEO Audit Engine | ✅ DONE | 25 skills + 18 agents, centralgear audit delivered |
+| 1 | SEO Audit Engine | ✅ DONE | 25 skills + 18 agents, first client audit delivered |
 | 2 | Blog Engine Install | ✅ DONE | 30 blog skills + 5 agents in vendor/ |
 | 3 | Content Pipeline | 🔄 IN PROGRESS | Wire blog skills, brand init, first article |
 | 4 | GSD Optimization | 📋 PLANNED | Hooks wired, verifier, tools tested |
@@ -61,7 +61,7 @@ The architecture hardening that took the stress-test ratings to A-tier:
 
 Phase 3: Wire blog sub-skills so `/blog write`, `/blog calendar`,
 `/blog cluster` resolve from `vendor/claude-blog/skills/`. Run
-`/blog brand init` for centralgear-co-uk. Generate first article.
+`/blog brand init` for the active client. Generate first article.
 
 ## ▶ Next Up — [SEO-OPS] SEO Operations Platform
 

@@ -12,7 +12,7 @@
 - [x] 25 seo-* skills in `vendor/claude-seo/skills/`
 - [x] 18 seo-* agents in `vendor/claude-seo/agents/`
 - [x] Python venv + all dependencies installed
-- [x] First real client audit: `Projects/centralgear-co-uk/` (score 46/F)
+- [x] First real client audit delivered (score 46/F) — stored locally in gitignored `Projects/`
 - [x] All 5 deliverables: health-score.json, fix-plan.md, report.md, client-audit-report.md, client-audit-report.html
 
 ### Phase 2: Blog Engine Install ✅ COMPLETE
@@ -24,13 +24,13 @@
 
 ### Phase 3: Content Pipeline 🔄 IN PROGRESS
 **Goal:** End-to-end content generation: `/seo write-blog` produces a
-complete article from centralgear.co.uk audit findings.
+complete article from a client's audit findings.
 
 - [ ] CLAUDE.md skill discovery points to `vendor/claude-blog/skills/`
-- [ ] `/blog brand init` → `Projects/centralgear-co-uk/brand/BRAND.md` + `VOICE.md`
-- [ ] First blog article → `Projects/centralgear-co-uk/final/blog/`
+- [ ] `/blog brand init` → `Projects/<domain-slug>/brand/BRAND.md` + `VOICE.md`
+- [ ] First blog article → `Projects/<domain-slug>/final/blog/`
 - [ ] Article score ≥ 90/100 via analyze_blog.py
-- [ ] Content calendar → `Projects/centralgear-co-uk/final/content-calendar.md`
+- [ ] Content calendar → `Projects/<domain-slug>/final/content-calendar.md`
 
 ### Phase 4: GSD Optimization 📋 PLANNED
 **Goal:** Context safety, prompt injection protection, goal-backward verification.

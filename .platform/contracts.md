@@ -88,16 +88,16 @@ Projects/_learnings/learnings.jsonl   # append-only cross-project learnings
 
 ```
 ---
-domain: centralgear-co-uk
-first_audited: 2026-03-12
-last_touched: 2026-06-03
+domain: example-com
+first_audited: 2026-01-01
+last_touched: 2026-01-15
 ---
 
 ## Findings Log
 
-- 2026-03-12 (seo-technical): Sitemap missing 40% of product URLs.
-- 2026-03-12 (orchestrator): Composite health score 46/100, baseline set.
-- 2026-06-03 (blog-writer): Published 3 cluster posts targeting "trail gear".
+- 2026-01-01 (seo-technical): Sitemap missing 40% of product URLs.
+- 2026-01-01 (orchestrator): Composite health score 46/100, baseline set.
+- 2026-01-15 (blog-writer): Published 3 cluster posts targeting the primary topic.
 ```
 
 Rules:
@@ -114,4 +114,4 @@ Derive the slug from the hostname:
 - Lowercase everything.
 - Replace dots with hyphens.
 
-Example: `https://www.CentralGear.co.uk/` → `centralgear-co-uk`.
+Example: `https://www.Example.co.uk/` → `example-co-uk`.

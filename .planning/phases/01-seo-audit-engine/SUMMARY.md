@@ -12,15 +12,15 @@ agents: Claude (claude-sonnet-4-6), Gemini (Antigravity)
 Full-scale parallel SEO audit system. 25 skills + 18 agents. Python 3.13
 venv at `vendor/claude-seo/skills/seo/.venv/` with all dependencies.
 
-## First Client Audit: centralgear.co.uk
+## First Client Audit (stored locally in gitignored `Projects/`)
 
 - **Score:** 46/100 (Grade F)
-- **Output:** `Projects/centralgear-co-uk/` — all 5 deliverables present
-- **Top critical issues:**
-  - 404 on /book-now/ (main booking page)
-  - Counter animation showing "1%" (JS conflict)
-  - Dual URL structure /service/ vs /services/
-  - Missing AutoRepair/LocalBusiness schema
+- **Output:** `Projects/<domain-slug>/` — all 5 deliverables present
+- **Representative critical issues found:**
+  - 404 on a primary conversion page
+  - Broken counter animation (JS conflict)
+  - Dual URL structure causing canonical dilution
+  - Missing LocalBusiness schema
   - robots.txt blocking pagination crawl
 - **HTML dashboard:** Interactive SPA — radial score, Action Planner
   with localStorage, Developer Assets tab with copy snippets

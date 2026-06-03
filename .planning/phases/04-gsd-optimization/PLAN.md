@@ -23,8 +23,8 @@ PreToolUse: gsd-prompt-guard.js on Write/Edit to .planning/
 PostToolUse: gsd-context-monitor.js on every tool call
 
 ### 4.2 — Test gsd-tools
-`node .tools/gsd-tools.cjs generate-slug "DSG Gearbox Warning Signs"`
-Expected: `dsg-gearbox-warning-signs`
+`node .tools/gsd-tools.cjs generate-slug "Your Article Title Here"`
+Expected: `your-article-title-here`
 
 ### 4.3 — Run seo-verifier on Phase 3 output
 Verify blog delivery: all 6 files exist, score >=90, all gates passed.
