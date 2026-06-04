@@ -18,6 +18,18 @@ $ROOT = $PSScriptRoot
 
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
 function Write-Ok($msg)   { Write-Host "    [OK] $msg" -ForegroundColor Green }
+
+# ─────────────────────────────────────────────────────────
+# Banner
+# ─────────────────────────────────────────────────────────
+Write-Host ""
+Write-Host "  ╔══════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "  ║                                                  ║" -ForegroundColor Cyan
+Write-Host "  ║    ⚗  SEO Lab  —  Installer                      ║" -ForegroundColor Cyan
+Write-Host "  ║    Audit · Strategize · Write                   ║" -ForegroundColor Cyan
+Write-Host "  ║                                                  ║" -ForegroundColor Cyan
+Write-Host "  ╚══════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
 function Write-Warn($msg) { Write-Host "    [WARN] $msg" -ForegroundColor Yellow }
 function Write-Fail($msg) { Write-Host "`n    [FAIL] $msg" -ForegroundColor Red }
 
@@ -185,19 +197,26 @@ Write-Ok "Projects/ ready (gitignored — client data stays local)"
 # Done
 # ─────────────────────────────────────────────────────────
 Write-Host ""
-Write-Host "════════════════════════════════════════════════════" -ForegroundColor Green
-Write-Host "  SEO Lab — Setup Complete"          -ForegroundColor Green
-Write-Host "════════════════════════════════════════════════════" -ForegroundColor Green
+Write-Host "  ╔══════════════════════════════════════════════════╗" -ForegroundColor Green
+Write-Host "  ║                                                  ║" -ForegroundColor Green
+Write-Host "  ║    [OK] SEO Lab - Setup Complete                ║" -ForegroundColor Green
+Write-Host "  ║                                                  ║" -ForegroundColor Green
+Write-Host "  ╚══════════════════════════════════════════════════╝" -ForegroundColor Green
 Write-Host ""
-Write-Host "  Python venv : vendor\claude-seo\skills\seo\.venv"
-Write-Host "  SEO skills  : vendor\claude-seo\skills\ (25 skills)"
-Write-Host "  Blog skills : vendor\claude-blog\skills\ (30 skills)"
-Write-Host "  State file  : .planning\STATE.md"
+Write-Host "  Installed:" -ForegroundColor White
+Write-Host "    SEO skills   vendor\claude-seo\skills\  (25 skills, 18 agents)" -ForegroundColor Green
+Write-Host "    Blog skills  vendor\claude-blog\skills\ (30 skills,  5 agents)" -ForegroundColor Green
+Write-Host "    Python venv  vendor\claude-seo\skills\seo\.venv" -ForegroundColor Green
+Write-Host "    State file   .planning\STATE.md" -ForegroundColor Green
 Write-Host ""
-Write-Host "  First command to run in Claude Code or Gemini:" -ForegroundColor Cyan
+Write-Host "  Commands:" -ForegroundColor Cyan
+Write-Host "    /seo audit <url>           Full parallel site audit" -ForegroundColor White
+Write-Host "    /seo write-blog <keyword>  Write a ranked article" -ForegroundColor White
+Write-Host "    /seo content-plan <url>    90-day editorial calendar" -ForegroundColor White
 Write-Host ""
-Write-Host "    /seo audit https://yoursite.com" -ForegroundColor White
+Write-Host "  Get started - open Claude Code or Gemini CLI and run:" -ForegroundColor Cyan
+Write-Host "    /seo audit https://yoursite.com" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "  Or resume current work:" -ForegroundColor Cyan
-Write-Host "    Read .planning\STATE.md for the Next Up command"
+Write-Host "  Resume previous work:" -ForegroundColor Cyan
+Write-Host "    Read .planning\STATE.md - the Next Up block has your exact command." -ForegroundColor White
 Write-Host ""

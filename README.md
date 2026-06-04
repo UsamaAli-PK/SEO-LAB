@@ -2,12 +2,14 @@
 <div align="center">
 
 ```
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║   ⚗️   SEO Lab                                              ║
-║   AI-powered SEO audit, strategy & content system           ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║    ⚗  SEO Lab                                                   ║
+║                                                                  ║
+║    Audit  ·  Strategize  ·  Write                               ║
+║    AI-powered SEO — any agent, any site, fully local            ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
 ```
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
