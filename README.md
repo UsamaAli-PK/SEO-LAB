@@ -67,13 +67,21 @@ Clone, run `install.ps1`, ready. Python, Node.js and Git are auto-installed if m
 
 ## Get Started
 
+**Step 1 — Install Git** *(skip if already installed)*
+
 ```powershell
-git clone https://github.com/UsamaAli-PK/SEO-LAB.git
-cd SEO-LAB
-.\install.ps1
+winget install --id Git.Git --accept-package-agreements --accept-source-agreements
 ```
 
-Open your AI agent in this folder. It reads `.planning/STATE.md` first and tells you exactly where to begin.
+**Step 2 — Clone and set up**
+
+```powershell
+git clone https://github.com/UsamaAli-PK/SEO-LAB.git; Set-Location SEO-LAB; .\install.ps1
+```
+
+`install.ps1` handles the rest — Python, Node.js, all dependencies, and the latest skill versions.
+
+Open your AI agent in the `SEO-LAB` folder. It reads `.planning/STATE.md` first and tells you exactly where to begin.
 
 ---
 
