@@ -43,6 +43,44 @@
 
 ---
 
+## Get Started
+
+```powershell
+git clone https://github.com/UsamaAli-PK/SEO-LAB.git
+cd SEO-LAB
+.\install.ps1
+```
+
+Open your AI agent in this folder. It reads `.planning/STATE.md` first and tells you exactly where to begin.
+
+---
+
+## How You Work With It
+
+SEO Lab is conversation-driven. You open the folder in your AI agent of choice, describe what you need, and the system handles the rest. No memorizing syntax. No switching tools.
+
+**Audit a site**
+> "Audit https://example.com and tell me what's hurting its rankings most"
+
+The agent reads the workflow, fetches the page once, runs all analysis in parallel, scores every category, and delivers a prioritized fix plan with an interactive HTML dashboard.
+
+**Write content**
+> "Write a blog post targeting 'best CRM for small business' — use the audit findings for context"
+
+The agent researches 8–12 current statistics from Tier 1 sources, builds an outline, writes with E-E-A-T signals baked in, runs a 5-gate quality check, and delivers a complete article with rendered HTML and PDF. If the quality score is below 90/100, it rewrites — you never see a draft that hasn't passed.
+
+**Build a strategy**
+> "Build a 90-day content calendar from the audit findings"
+
+The agent maps keyword gaps, groups topics into hub-and-spoke clusters, and produces a week-by-week editorial calendar ready to execute.
+
+**Resume work**
+> "What were we working on? Continue from where we left off."
+
+The agent reads `.planning/STATE.md`, shows you the current phase, and picks up from the exact next step — whether that session was yesterday or three weeks ago, and whether it was you, Claude, or Gemini who left off last.
+
+---
+
 ## What You Get
 
 ### 🔍 Audit — Full Site Analysis
@@ -148,7 +186,7 @@ One conversation. Fully automated from research through quality-gated delivery.
 
 **Research**
 - 8–12 sourced statistics
-- Tier 1–3 source only
+- Tier 1–3 sources only
 - SERP competitor analysis
 - PAA question mining
 - Stock images sourced
@@ -255,32 +293,6 @@ Clone, run `install.ps1`, ready. Python venv, Playwright, and all dependencies h
 
 ---
 
-## How You Work With It
-
-SEO Lab is conversation-driven. You open the folder in your AI agent of choice, describe what you need, and the system handles the rest. No memorizing syntax. No switching tools.
-
-**Audit a site**
-> "Audit https://example.com and tell me what's hurting its rankings most"
-
-The agent reads the workflow, fetches the page once, runs all analysis in parallel, scores every category, and delivers a prioritized fix plan with an interactive HTML dashboard.
-
-**Write content**
-> "Write a blog post targeting 'best CRM for small business' — use the audit findings for context"
-
-The agent researches 8–12 current statistics from Tier 1 sources, builds an outline, writes with E-E-A-T signals baked in, runs a 5-gate quality check, and delivers a complete article with rendered HTML and PDF. If the quality score is below 90/100, it rewrites — you never see a draft that hasn't passed.
-
-**Build a strategy**
-> "Build a 90-day content calendar from the audit findings"
-
-The agent maps keyword gaps, groups topics into hub-and-spoke clusters, and produces a week-by-week editorial calendar ready to execute.
-
-**Resume work**
-> "What were we working on? Continue from where we left off."
-
-The agent reads `.planning/STATE.md`, shows you the current phase, and picks up from the exact next step — whether that session was yesterday or three weeks ago, and whether it was you, Claude, or Gemini who left off last.
-
----
-
 ## Why SEO Lab Over claude-seo or claude-blog Alone
 
 claude-seo and claude-blog are excellent standalone tools. SEO Lab is built on top of them — and adds the layer that makes them actually usable as a professional operation.
@@ -315,18 +327,6 @@ claude-seo and claude-blog are excellent standalone tools. SEO Lab is built on t
 │  scoring begins)            │              │              │  blog gates  │
 └─────────────────────────────┴──────────────┴──────────────┴──────────────┘
 ```
-
----
-
-## Get Started
-
-```powershell
-git clone https://github.com/UsamaAli-PK/SEO-LAB.git
-cd SEO-LAB
-.\install.ps1
-```
-
-Open your AI agent in this folder. It reads `.planning/STATE.md` first and tells you exactly where to begin.
 
 ---
 
