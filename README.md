@@ -22,24 +22,46 @@
 ## The Pipeline
 
 ```
-         Any URL or Keyword
-                 │
-                 ▼
-    ┌────────────────────┐      ┌────────────────────┐      ┌────────────────────┐
-    │    🔍  Audit        │─────▶│   📅  Strategy      │─────▶│   ✍️  Content      │
-    │                    │      │                    │      │                    │
-    │  14 agents run     │      │  Topic clusters,   │      │  Research →        │
-    │  in parallel.      │      │  keyword maps,     │      │  Write →           │
-    │  Every dimension   │      │  90-day editorial  │      │  5-gate QA →       │
-    │  of SEO covered.   │      │  calendar built    │      │  Ship ≥ 90/100     │
-    │                    │      │  from audit data.  │      │                    │
-    └────────────────────┘      └────────────────────┘      └────────────────────┘
-                 │                                                     │
-                 ▼                                                     ▼
-       health-score.json                                    article.md + .html + .pdf
-       fix-plan.md                                          preflight-report.json
-       client-audit-report.html                             review.md (all gates passed)
+      Any URL or Keyword
+             │
+             ▼
+  ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+  │   🔍  Audit      │───▶│  📅  Strategy    │───▶│  ✍️  Content    │
+  │                  │    │                  │    │                  │
+  │  14 agents run   │    │  Topic clusters  │    │  Research →      │
+  │  in parallel.    │    │  Keyword maps    │    │  Write →         │
+  │  Every SEO       │    │  90-day calendar │    │  5-gate QA →     │
+  │  dimension.      │    │  from audit data │    │  Ship ≥ 90/100   │
+  └──────────────────┘    └──────────────────┘    └──────────────────┘
+             │                                              │
+             ▼                                              ▼
+   health-score.json                            article.md + .html + .pdf
+   fix-plan.md                                  preflight-report.json
+   client-audit-report.html                     review.md (all gates ✓)
 ```
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+**🤖 Any AI Agent**
+Works with Claude, Gemini, GPT, or any future tool — through natural conversation. A shared state file means any agent picks up exactly where the last one stopped.
+
+</td>
+<td width="33%" valign="top">
+
+**🔒 Fully Local**
+Client data never leaves your machine. No subscriptions, no per-seat pricing. Cross-session memory builds — client 10 benefits from everything learned on clients 1 through 9.
+
+</td>
+<td width="33%" valign="top">
+
+**⚡ One Command Setup**
+Clone, run `install.ps1`, ready. Python, Node.js and Git are auto-installed if missing. `update.ps1` pulls latest skills without touching your data or config.
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -60,24 +82,24 @@ Open your AI agent in this folder. It reads `.planning/STATE.md` first and tells
 SEO Lab is conversation-driven. You open the folder in your AI agent of choice, describe what you need, and the system handles the rest. No memorizing syntax. No switching tools.
 
 **Audit a site**
-> "Audit https://example.com and tell me what's hurting its rankings most"
+> *"Audit https://example.com and tell me what's hurting its rankings most"*
 
-The agent reads the workflow, fetches the page once, runs all analysis in parallel, scores every category, and delivers a prioritized fix plan with an interactive HTML dashboard.
+The agent fetches the page once, runs all 14 analysis agents in parallel, scores every category, and delivers a prioritized fix plan with an interactive HTML dashboard.
 
 **Write content**
-> "Write a blog post targeting 'best CRM for small business' — use the audit findings for context"
+> *"Write a blog post targeting 'best CRM for small business' — use the audit findings for context"*
 
-The agent researches 8–12 current statistics from Tier 1 sources, builds an outline, writes with E-E-A-T signals baked in, runs a 5-gate quality check, and delivers a complete article with rendered HTML and PDF. If the quality score is below 90/100, it rewrites — you never see a draft that hasn't passed.
+The agent researches 8–12 current statistics from Tier 1 sources, writes with E-E-A-T signals baked in, runs a 5-gate quality check, and delivers a complete article with rendered HTML and PDF. If the quality score is below 90/100, it rewrites — you never see a draft that hasn't passed.
 
 **Build a strategy**
-> "Build a 90-day content calendar from the audit findings"
+> *"Build a 90-day content calendar from the audit findings"*
 
 The agent maps keyword gaps, groups topics into hub-and-spoke clusters, and produces a week-by-week editorial calendar ready to execute.
 
 **Resume work**
-> "What were we working on? Continue from where we left off."
+> *"What were we working on? Continue from where we left off."*
 
-The agent reads `.planning/STATE.md`, shows you the current phase, and picks up from the exact next step — whether that session was yesterday or three weeks ago, and whether it was you, Claude, or Gemini who left off last.
+The agent reads `.planning/STATE.md`, shows you the current phase, and picks up from the exact next step — whether that was yesterday or three weeks ago, and whether it was Claude, Gemini, or you who left off.
 
 ---
 
@@ -96,7 +118,7 @@ The agent reads `.planning/STATE.md`, shows you the current phase, and picks up 
 - Redirects & canonical tags
 - robots.txt & sitemap gaps
 - HTTPS & security headers
-- JavaScript rendering (CSR vs SSR)
+- JavaScript rendering
 
 </td>
 <td width="25%" valign="top">
@@ -134,7 +156,7 @@ The agent reads `.planning/STATE.md`, shows you the current phase, and picks up 
 <td width="25%" valign="top">
 
 **Local SEO**
-- Google Business Profile audit
+- Google Business Profile
 - NAP consistency
 - Citation analysis
 - Review signals
@@ -154,7 +176,7 @@ The agent reads `.planning/STATE.md`, shows you the current phase, and picks up 
 <td width="25%" valign="top">
 
 **Backlinks & Authority**
-- Moz, Bing & Common Crawl data
+- Moz, Bing & Common Crawl
 - Link quality scoring
 - Competitor gap analysis
 - Toxic link detection
@@ -165,10 +187,10 @@ The agent reads `.planning/STATE.md`, shows you the current phase, and picks up 
 
 **Deliverables**
 - `health-score.json` (0–100)
-- `fix-plan.md` (Critical → Low)
+- `fix-plan.md` Critical → Low
 - `client-audit-report.html`
-  ↳ action planner + score
-  ↳ copy-paste dev assets
+- Action planner & score widget
+- Copy-paste developer assets
 
 </td>
 </tr>
@@ -208,17 +230,17 @@ One conversation. Fully automated from research through quality-gated delivery.
 - Structure & placeholders
 - Prose & anti-AI patterns
 - Visual audit & alt text
-- SEO check (title, meta, schema)
+- SEO — title, meta, schema
 - Score ≥ 90/100 required
 
 </td>
 <td width="25%" valign="top">
 
 **Deliverables**
-- `article.md` (full source)
-- `article.html` (rendered)
+- `article.md` full source
+- `article.html` rendered
 - `article.pdf`
-- `hero.<ext>` (cover image)
+- `hero.<ext>` cover image
 - `preflight-report.json`
 
 </td>
@@ -266,67 +288,66 @@ One conversation. Fully automated from research through quality-gated delivery.
 
 ---
 
-### 🤖 &nbsp; 🔒 &nbsp; ⚡ Platform
-
-<table>
-<tr>
-<td width="33%" valign="top">
-
-**Any AI Agent**
-Works with Claude, Gemini, GPT, or any future tool — through natural conversation. A shared state file means any agent picks up exactly where the last one stopped.
-
-</td>
-<td width="33%" valign="top">
-
-**Fully Local**
-Client data never leaves your machine. No subscriptions, no per-seat pricing. Cross-session memory builds — client 10 benefits from everything learned on clients 1 through 9.
-
-</td>
-<td width="33%" valign="top">
-
-**One Command Setup**
-Clone, run `install.ps1`, ready. Python venv, Playwright, and all dependencies handled. `update.ps1` syncs new skill versions without touching your data or config.
-
-</td>
-</tr>
-</table>
-
----
-
 ## Why SEO Lab Over claude-seo or claude-blog Alone
 
 claude-seo and claude-blog are excellent standalone tools. SEO Lab is built on top of them — and adds the layer that makes them actually usable as a professional operation.
 
-```
-┌─────────────────────────────┬──────────────┬──────────────┬──────────────┐
-│                             │  claude-seo  │  claude-blog │   SEO Lab    │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Works with any AI agent     │      ✗       │      ✗       │      ✅      │
-│ (Claude, Gemini, GPT…)      │  Claude Code │  Claude Code │  Any tool    │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Audit → Content pipeline    │      ✗       │      ✗       │      ✅      │
-│ (connected end-to-end)      │  audit only  │ content only │   unified    │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Cross-session memory        │      ✗       │      ✗       │      ✅      │
-│ (knows what was done before)│  forgets     │  forgets     │  STATE.md    │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Cross-client learning       │      ✗       │      ✗       │      ✅      │
-│ (patterns from past clients)│      —       │      —       │  JSONL store │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Conversation-first workflow │      ✗       │      ✗       │      ✅      │
-│ (no slash commands needed)  │ slash cmds   │ slash cmds   │  plain prose │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Self-contained folder       │      ✗       │      ✗       │      ✅      │
-│ (no global install needed)  │ ~/.claude/   │ ~/.claude/   │  repo only   │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Cost-aware model routing    │      ✗       │      ✗       │      ✅      │
-│ (budget vs quality per task)│  one model   │  one model   │  tiered      │
-├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
-│ Audit quality gate          │      ✗       │      ✅      │      ✅      │
-│ (validates output before    │  no gate     │  blog only   │  audit +     │
-│  scoring begins)            │              │              │  blog gates  │
-└─────────────────────────────┴──────────────┴──────────────┴──────────────┘
-```
+<table>
+<tr>
+<th align="left">Feature</th>
+<th align="center">claude-seo</th>
+<th align="center">claude-blog</th>
+<th align="center">SEO Lab</th>
+</tr>
+<tr>
+<td>Works with any AI agent (Claude, Gemini, GPT…)</td>
+<td align="center">Claude Code only</td>
+<td align="center">Claude Code only</td>
+<td align="center">✅ Any tool</td>
+</tr>
+<tr>
+<td>Audit → Content pipeline (connected end-to-end)</td>
+<td align="center">Audit only</td>
+<td align="center">Content only</td>
+<td align="center">✅ Unified</td>
+</tr>
+<tr>
+<td>Cross-session memory (knows what was done before)</td>
+<td align="center">Forgets</td>
+<td align="center">Forgets</td>
+<td align="center">✅ STATE.md</td>
+</tr>
+<tr>
+<td>Cross-client learning (patterns from past clients)</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">✅ JSONL store</td>
+</tr>
+<tr>
+<td>Conversation-first (no slash commands needed)</td>
+<td align="center">Slash commands</td>
+<td align="center">Slash commands</td>
+<td align="center">✅ Plain prose</td>
+</tr>
+<tr>
+<td>Self-contained folder (no global install needed)</td>
+<td align="center">~/.claude/</td>
+<td align="center">~/.claude/</td>
+<td align="center">✅ Repo only</td>
+</tr>
+<tr>
+<td>Cost-aware model routing (budget vs quality)</td>
+<td align="center">One model</td>
+<td align="center">One model</td>
+<td align="center">✅ Tiered</td>
+</tr>
+<tr>
+<td>Audit quality gate (validates before scoring)</td>
+<td align="center">No gate</td>
+<td align="center">Blog only</td>
+<td align="center">✅ Audit + Blog</td>
+</tr>
+</table>
 
 ---
 
