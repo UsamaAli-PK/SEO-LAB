@@ -1,9 +1,9 @@
-# install.ps1 — SEO Operations Platform
+# install.ps1 — SEO Lab
 # One-command full setup for a new machine.
 # Idempotent: safe to run multiple times.
 #
 # Usage:
-#   cd D:\path\to\seo-ops
+#   cd D:\path\to\SEO-LAB
 #   .\install.ps1
 #
 # What it does:
@@ -146,8 +146,8 @@ Write-Step "Verifying .tools/gsd-tools.cjs..."
 $toolsPath = Join-Path $ROOT ".tools\gsd-tools.cjs"
 if (Test-Path $toolsPath) {
     try {
-        $slug = node $toolsPath generate-slug "SEO Operations Platform" 2>&1
-        if ($slug -match "seo-operations-platform") {
+        $slug = node $toolsPath generate-slug "SEO Lab" 2>&1
+        if ($slug -match "seo-lab") {
             Write-Ok "gsd-tools.cjs working: generate-slug -> $slug"
         } else {
             Write-Warn "gsd-tools.cjs returned unexpected output: $slug"
@@ -186,7 +186,7 @@ Write-Ok "Projects/ ready (gitignored — client data stays local)"
 # ─────────────────────────────────────────────────────────
 Write-Host ""
 Write-Host "════════════════════════════════════════════════════" -ForegroundColor Green
-Write-Host "  SEO Operations Platform — Setup Complete"          -ForegroundColor Green
+Write-Host "  SEO Lab — Setup Complete"          -ForegroundColor Green
 Write-Host "════════════════════════════════════════════════════" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Python venv : vendor\claude-seo\skills\seo\.venv"

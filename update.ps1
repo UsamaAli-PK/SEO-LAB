@@ -1,9 +1,9 @@
-# update.ps1 — SEO Operations Platform
+# update.ps1 — SEO Lab
 # Re-syncs vendor/ from upstream repositories.
 # Your .planning/, .hooks/, .agents/, CLAUDE.md are NEVER touched.
 #
 # Usage:
-#   cd D:\path\to\seo-ops
+#   cd D:\path\to\SEO-LAB
 #   .\update.ps1
 #
 # What it does:
@@ -28,7 +28,7 @@ if (-not (Test-Path $vendorFile)) {
 }
 $vendor = Get-Content $vendorFile | ConvertFrom-Json
 
-$tempBase = Join-Path $env:TEMP "seo-ops-update"
+$tempBase = Join-Path $env:TEMP "seo-lab-update"
 $requirementsChanged = $false
 $report = @()
 

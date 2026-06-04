@@ -1,4 +1,4 @@
-# SEO Operations Platform
+# SEO Lab
 
 > A self-contained, AI-agent-ready SEO audit and content production platform.
 > Built and maintained by **[Usama Ali](https://www.linkedin.com/in/usamaalipk/)**.
@@ -26,8 +26,8 @@ and exactly what command to run next.
 ### New machine setup (one command)
 
 ```powershell
-git clone https://github.com/usamaali/seo-ops
-cd seo-ops
+git clone https://github.com/UsamaAli-PK/SEO-LAB.git
+cd SEO-LAB
 .\install.ps1
 ```
 
@@ -52,7 +52,7 @@ Then open Claude Code or Gemini CLI in this folder. The agent reads
 ## Platform Architecture
 
 ```
-seo-ops/
+SEO-LAB/
 ├── .planning/              State system — any agent reads this first
 │   ├── STATE.md            Master resume file (current phase, next command)
 │   ├── ROADMAP.md          All phases with success criteria

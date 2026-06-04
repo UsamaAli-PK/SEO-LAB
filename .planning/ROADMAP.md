@@ -1,6 +1,6 @@
-# SEO Operations Platform — Roadmap
+# SEO Lab — Roadmap
 
-**Project:** SEO-OPS | **Owner:** Usama Ali | **Started:** 2026-06-02
+**Project:** SEO-LAB | **Owner:** Usama Ali | **Started:** 2026-06-02
 
 ---
 

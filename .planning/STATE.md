@@ -1,6 +1,6 @@
 ---
-project: SEO Operations Platform
-project_code: SEO-OPS
+project: SEO Lab
+project_code: SEO-LAB
 last_updated: 2026-06-03
 last_agent: claude-opus-4-8
 current_phase: 3
@@ -11,7 +11,7 @@ blocked: false
 blocked_reason: null
 ---
 
-# SEO-OPS State
+# SEO Lab — State
 
 ## What This Project Is
 
@@ -63,7 +63,7 @@ Phase 3: Wire blog sub-skills so `/blog write`, `/blog calendar`,
 `/blog cluster` resolve from `vendor/claude-blog/skills/`. Run
 `/blog brand init` for the active client. Generate first article.
 
-## ▶ Next Up — [SEO-OPS] SEO Operations Platform
+## ▶ Next Up — [SEO-LAB] SEO Lab
 
 **Phase 3: Content Pipeline** — resume at first unchecked task in the PLAN
 

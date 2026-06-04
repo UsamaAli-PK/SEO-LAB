@@ -1,4 +1,4 @@
-# SEO Operations Platform — Agent Instructions
+# SEO Lab — Agent Instructions
 
 > **For every AI agent reading this (Claude, Gemini, GPT, Codex, or any future tool):**
 > This is your single source of truth. Read this entire file before doing anything.
