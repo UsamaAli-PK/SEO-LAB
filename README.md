@@ -9,17 +9,6 @@
 
 <div align="center">
 
-```
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║    ⚗  SEO Lab                                                   ║
-║                                                                  ║
-║    Audit  ·  Strategize  ·  Write                               ║
-║    AI-powered SEO — any agent, any site, fully local            ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![Works with Claude](https://img.shields.io/badge/Works%20with-Claude-blueviolet.svg)](https://claude.ai)
@@ -89,21 +78,21 @@ Turn one audit into a full content operation. Topic clusters, keyword opportunit
 
 ### 🤖 Any AI Agent
 
-Works with Claude Code, Gemini CLI, or any AI tool. A shared state file tracks every session — switch agents mid-project, resume after weeks away, or hand off between tools without losing context.
+Works with Claude, Gemini, GPT, or any future tool — through natural conversation, not locked slash commands. A shared state file tracks every session so any agent picks up exactly where the last one stopped.
 
 </td>
 <td width="33%" valign="top">
 
 ### 🔒 Fully Local
 
-Everything runs on your machine. Client data never leaves. No subscriptions, no per-seat pricing, no data sent to third-party dashboards. The system remembers your work across sessions through plain files.
+Everything runs on your machine. Client data never leaves. No subscriptions, no per-seat pricing. The system builds memory across sessions — client 10 benefits from everything learned on clients 1 through 9.
 
 </td>
 <td width="33%" valign="top">
 
 ### ⚡ One Command Setup
 
-Clone, run `install.ps1`, and you're ready. Python venv, Playwright, and all dependencies handled automatically. When new skill versions release, `update.ps1` syncs them without touching your data.
+Clone, run `install.ps1`, and you're ready. Python venv, Playwright, and all dependencies handled automatically. When skill versions update, `update.ps1` syncs them without touching your data or config.
 
 </td>
 </tr>
@@ -111,7 +100,70 @@ Clone, run `install.ps1`, and you're ready. Python venv, Playwright, and all dep
 
 ---
 
-## Quick Start
+## How You Work With It
+
+SEO Lab is conversation-driven. You open the folder in your AI agent of choice, describe what you need, and the system handles the rest. No memorizing syntax. No switching tools.
+
+**Audit a site**
+> "Audit https://example.com and tell me what's hurting its rankings most"
+
+The agent reads the workflow, fetches the page once, runs all analysis in parallel, scores every category, and delivers a prioritized fix plan with an interactive HTML dashboard.
+
+**Write content**
+> "Write a blog post targeting 'best CRM for small business' — use the audit findings for context"
+
+The agent researches 8–12 current statistics from Tier 1 sources, builds an outline, writes with E-E-A-T signals baked in, runs a 5-gate quality check, and delivers a complete article with rendered HTML and PDF. If the quality score is below 90/100, it rewrites — you never see a draft that hasn't passed.
+
+**Build a strategy**
+> "Build a 90-day content calendar from the audit findings"
+
+The agent maps keyword gaps, groups topics into hub-and-spoke clusters, and produces a week-by-week editorial calendar ready to execute.
+
+**Resume work**
+> "What were we working on? Continue from where we left off."
+
+The agent reads `.planning/STATE.md`, shows you the current phase, and picks up from the exact next step — whether that session was yesterday or three weeks ago, and whether it was you, Claude, or Gemini who left off last.
+
+---
+
+## Why SEO Lab Over claude-seo or claude-blog Alone
+
+claude-seo and claude-blog are excellent standalone tools. SEO Lab is built on top of them — and adds the layer that makes them actually usable as a professional operation.
+
+```
+┌─────────────────────────────┬──────────────┬──────────────┬──────────────┐
+│                             │  claude-seo  │  claude-blog │   SEO Lab    │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Works with any AI agent     │      ✗       │      ✗       │      ✅      │
+│ (Claude, Gemini, GPT…)      │  Claude Code │  Claude Code │  Any tool    │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Audit → Content pipeline    │      ✗       │      ✗       │      ✅      │
+│ (connected end-to-end)      │  audit only  │ content only │   unified    │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Cross-session memory        │      ✗       │      ✗       │      ✅      │
+│ (knows what was done before)│  forgets     │  forgets     │  STATE.md    │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Cross-client learning       │      ✗       │      ✗       │      ✅      │
+│ (patterns from past clients)│      —       │      —       │  JSONL store │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Conversation-first workflow │      ✗       │      ✗       │      ✅      │
+│ (no slash commands needed)  │ slash cmds   │ slash cmds   │  plain prose │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Self-contained folder       │      ✗       │      ✗       │      ✅      │
+│ (no global install needed)  │ ~/.claude/   │ ~/.claude/   │  repo only   │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Cost-aware model routing    │      ✗       │      ✗       │      ✅      │
+│ (budget vs quality per task)│  one model   │  one model   │  tiered      │
+├─────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Audit quality gate          │      ✗       │      ✅      │      ✅      │
+│ (validates output before    │  no gate     │  blog only   │  audit +     │
+│  scoring begins)            │              │              │  blog gates  │
+└─────────────────────────────┴──────────────┴──────────────┴──────────────┘
+```
+
+---
+
+## Get Started
 
 ```powershell
 git clone https://github.com/UsamaAli-PK/SEO-LAB.git
@@ -119,44 +171,7 @@ cd SEO-LAB
 .\install.ps1
 ```
 
-Open your AI agent in this folder, then run your first audit:
-
-```
-/seo audit https://yoursite.com
-```
-
----
-
-## Commands
-
-### 🔍 Audit
-
-| Command | What it does |
-|---------|-------------|
-| `/seo audit <url>` | Full parallel site audit — all agents |
-| `/seo technical <url>` | Crawlability, redirects, canonicals, security |
-| `/seo content <url>` | E-E-A-T, readability, thin content detection |
-| `/seo schema <url>` | Schema markup detection and generation |
-| `/seo local <url>` | GBP, citations, local pack analysis |
-| `/seo geo <url>` | AI Overviews and GEO readiness |
-| `/seo performance <url>` | Core Web Vitals — LCP, INP, CLS |
-| `/seo cluster <keyword>` | Hub-and-spoke topic architecture |
-
-### ✍️ Content
-
-| Command | What it does |
-|---------|-------------|
-| `/seo write-blog <keyword>` | Full article with 5-gate delivery |
-| `/seo write-page <topic>` | Landing page content |
-| `/seo content-plan <url>` | 90-day editorial calendar |
-| `/seo keyword-research <seed>` | Keyword opportunity map |
-| `/blog brand init` | Set brand voice and tone for a client |
-
----
-
-## How It Works
-
-Every session starts by reading `.planning/STATE.md` — a plain file that records what's done, what's active, and exactly what comes next. Any agent reads it, picks up from that point, and updates it on the way out. Audits run up to 14 specialist agents in parallel, each producing a structured report. A validation gate checks all outputs exist before scoring begins. Content goes through automated research, structured writing, and a 5-gate preflight — structure, prose, visuals, SEO validation, quality score — before it's ever shown to you.
+Open your AI agent in this folder. It reads `.planning/STATE.md` first and tells you exactly where to begin.
 
 ---
 
@@ -165,6 +180,17 @@ Every session starts by reading `.planning/STATE.md` — a plain file that recor
 ```powershell
 .\update.ps1   # pulls latest skill versions — your data and config are never touched
 ```
+
+---
+
+<details>
+<summary>Quick command reference (for Claude Code users)</summary>
+
+**Audit:** `/seo audit <url>` · `/seo technical` · `/seo content` · `/seo schema` · `/seo local` · `/seo geo` · `/seo performance` · `/seo cluster <keyword>`
+
+**Content:** `/seo write-blog <keyword>` · `/seo write-page <topic>` · `/seo content-plan <url>` · `/seo keyword-research <seed>` · `/blog brand init`
+
+</details>
 
 ---
 
