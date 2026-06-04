@@ -1,24 +1,107 @@
-# SEO Lab
 
-A complete SEO and content system built for AI agents. Audit any website, build content strategy, and write ranked articles — all from a single folder that works with Claude, Gemini, or any AI tool you use.
+<div align="center">
 
-Built by [Usama Ali](https://www.linkedin.com/in/usamaalipk/)
+```
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   ⚗️   SEO Lab                                              ║
+║   AI-powered SEO audit, strategy & content system           ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![Works with Claude](https://img.shields.io/badge/Works%20with-Claude-blueviolet.svg)](https://claude.ai)
+[![Works with Gemini](https://img.shields.io/badge/Works%20with-Gemini-orange.svg)](https://gemini.google.com)
+[![Built by Usama Ali](https://img.shields.io/badge/Built%20by-Usama%20Ali-0077B5?logo=linkedin)](https://www.linkedin.com/in/usamaalipk/)
+
+</div>
 
 ---
 
-## What It Does
+## The Pipeline
 
-**Full-site SEO audits** — drop in a URL and get a complete technical breakdown: crawlability, content quality, schema markup, Core Web Vitals, local SEO, AI search readiness, and backlinks — all analyzed in parallel. Deliverables include a scored health report, a prioritized fix plan, and an interactive HTML dashboard you can hand straight to a client.
-
-**SEO-optimized content** — brief, research, outline, write, and quality-score a full article in one flow. Every piece goes through a 5-gate delivery check before it reaches you: structure, prose, visuals, SEO validation, and a minimum 90/100 quality score. Below that threshold, it rewrites itself.
-
-**Content strategy** — turn audit findings into a 90-day editorial plan. Topic clusters, keyword opportunity maps, hub-and-spoke architecture, and a publishing calendar built from real search data.
-
-**Multi-agent memory** — the system tracks progress in a single state file any AI agent can read. Switch from Claude to Gemini mid-project, resume after a break, or hand off to a teammate — it always knows exactly where you left off and what comes next.
+```
+         Any URL or Keyword
+                 │
+                 ▼
+    ┌────────────────────┐      ┌────────────────────┐      ┌────────────────────┐
+    │    🔍  Audit        │─────▶│   📅  Strategy      │─────▶│   ✍️  Content      │
+    │                    │      │                    │      │                    │
+    │  14 agents run     │      │  Topic clusters,   │      │  Research →        │
+    │  in parallel.      │      │  keyword maps,     │      │  Write →           │
+    │  Every dimension   │      │  90-day editorial  │      │  5-gate QA →       │
+    │  of SEO covered.   │      │  calendar built    │      │  Ship ≥ 90/100     │
+    │                    │      │  from audit data.  │      │                    │
+    └────────────────────┘      └────────────────────┘      └────────────────────┘
+                 │                                                     │
+                 ▼                                                     ▼
+       health-score.json                                    article.md + .html + .pdf
+       fix-plan.md                                          preflight-report.json
+       client-audit-report.html                             review.md (all gates passed)
+```
 
 ---
 
-## Get Started
+## What You Get
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### 🔍 Full Site Audit
+
+Technical health, content quality, schema markup, Core Web Vitals, local SEO, AI search readiness, and backlinks — all analyzed in parallel by specialist agents.
+
+Delivers a **scored health report**, a prioritized fix plan grouped by urgency, and an **interactive HTML dashboard** ready to hand to a client.
+
+</td>
+<td width="33%" valign="top">
+
+### ✍️ Ranked Content
+
+Brief → research → outline → write → quality-score → deliver. Every article goes through a **5-gate preflight** — structure, prose, visuals, SEO, and a minimum **90/100 quality score**.
+
+Below threshold it rewrites itself — up to 3 iterations — before it ever reaches you.
+
+</td>
+<td width="33%" valign="top">
+
+### 📅 Content Strategy
+
+Turn one audit into a full content operation. Topic clusters, keyword opportunity maps, hub-and-spoke architecture, and a **90-day editorial calendar** — all built from your audit findings, not guesswork.
+
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+
+### 🤖 Any AI Agent
+
+Works with Claude Code, Gemini CLI, or any AI tool. A shared state file tracks every session — switch agents mid-project, resume after weeks away, or hand off between tools without losing context.
+
+</td>
+<td width="33%" valign="top">
+
+### 🔒 Fully Local
+
+Everything runs on your machine. Client data never leaves. No subscriptions, no per-seat pricing, no data sent to third-party dashboards. The system remembers your work across sessions through plain files.
+
+</td>
+<td width="33%" valign="top">
+
+### ⚡ One Command Setup
+
+Clone, run `install.ps1`, and you're ready. Python venv, Playwright, and all dependencies handled automatically. When new skill versions release, `update.ps1` syncs them without touching your data.
+
+</td>
+</tr>
+</table>
+
+---
+
+## Quick Start
 
 ```powershell
 git clone https://github.com/UsamaAli-PK/SEO-LAB.git
@@ -26,7 +109,7 @@ cd SEO-LAB
 .\install.ps1
 ```
 
-Open your AI agent in this folder, then:
+Open your AI agent in this folder, then run your first audit:
 
 ```
 /seo audit https://yoursite.com
@@ -36,55 +119,49 @@ Open your AI agent in this folder, then:
 
 ## Commands
 
-### Audit
+### 🔍 Audit
+
 | Command | What it does |
 |---------|-------------|
-| `/seo audit <url>` | Full parallel site audit |
-| `/seo technical <url>` | Crawlability, redirects, canonicals |
-| `/seo content <url>` | E-E-A-T, readability, thin content |
-| `/seo schema <url>` | Schema detection and generation |
-| `/seo local <url>` | GBP, citations, local pack |
+| `/seo audit <url>` | Full parallel site audit — all agents |
+| `/seo technical <url>` | Crawlability, redirects, canonicals, security |
+| `/seo content <url>` | E-E-A-T, readability, thin content detection |
+| `/seo schema <url>` | Schema markup detection and generation |
+| `/seo local <url>` | GBP, citations, local pack analysis |
 | `/seo geo <url>` | AI Overviews and GEO readiness |
-| `/seo performance <url>` | Core Web Vitals (LCP, INP, CLS) |
-| `/seo cluster <keyword>` | Topic cluster architecture |
+| `/seo performance <url>` | Core Web Vitals — LCP, INP, CLS |
+| `/seo cluster <keyword>` | Hub-and-spoke topic architecture |
 
-### Content
+### ✍️ Content
+
 | Command | What it does |
 |---------|-------------|
 | `/seo write-blog <keyword>` | Full article with 5-gate delivery |
 | `/seo write-page <topic>` | Landing page content |
 | `/seo content-plan <url>` | 90-day editorial calendar |
 | `/seo keyword-research <seed>` | Keyword opportunity map |
-| `/blog brand init` | Set brand voice for a client |
+| `/blog brand init` | Set brand voice and tone for a client |
 
 ---
 
 ## How It Works
 
-Every session starts by reading `.planning/STATE.md` — a plain file that records what's been done, what's active, and what comes next. Any agent picks up from exactly that point. No re-explaining context, no starting over.
-
-Audits run up to 14 specialist agents in parallel, each writing a structured report to its own file. A validation gate checks all required outputs exist before scoring begins. Results roll up into a health score, a fix plan, and a client-ready HTML dashboard — all in `Projects/<domain>/`.
-
-Content goes through a research phase (8–12 sourced statistics, images, charts), a structured writing phase following the FLOW evidence framework, and an automated 5-gate preflight before delivery. If any gate fails, it iterates — up to 3 times — before escalating to you.
-
-Everything stays local. Client data never leaves your machine.
+Every session starts by reading `.planning/STATE.md` — a plain file that records what's done, what's active, and exactly what comes next. Any agent reads it, picks up from that point, and updates it on the way out. Audits run up to 14 specialist agents in parallel, each producing a structured report. A validation gate checks all outputs exist before scoring begins. Content goes through automated research, structured writing, and a 5-gate preflight — structure, prose, visuals, SEO validation, quality score — before it's ever shown to you.
 
 ---
 
 ## Keeping It Current
 
-When new skill versions release:
-
 ```powershell
-.\update.ps1
+.\update.ps1   # pulls latest skill versions — your data and config are never touched
 ```
-
-Your audits, content, state, and configuration are never touched — only the underlying skills update.
 
 ---
 
-## License
+<div align="center">
 
-MIT — [Usama Ali](https://www.linkedin.com/in/usamaalipk/)
+Built by [Usama Ali](https://www.linkedin.com/in/usamaalipk/) &nbsp;·&nbsp; MIT License
 
-Powered by [claude-seo](https://github.com/AgriciDaniel/claude-seo) and [claude-blog](https://github.com/AgriciDaniel/claude-blog), both MIT licensed.
+Powered by [claude-seo](https://github.com/AgriciDaniel/claude-seo) and [claude-blog](https://github.com/AgriciDaniel/claude-blog)
+
+</div>
