@@ -1,6 +1,14 @@
 
 <div align="center">
 
+<img src="assets/banner.svg" alt="SEO Lab — AI-powered SEO audit, strategy and content system. Animated terminal-style banner with SEO LAB figlet wordmark in orange gradient, scanning command palette, and pulsing status indicators." width="100%">
+
+</div>
+
+---
+
+<div align="center">
+
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
