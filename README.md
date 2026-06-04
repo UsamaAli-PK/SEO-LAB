@@ -45,54 +45,209 @@
 
 ## What You Get
 
+### 🔍 Audit — Full Site Analysis
+
+14 specialist agents run in parallel. Every dimension of SEO covered in one pass.
+
 <table>
 <tr>
-<td width="33%" valign="top">
+<td width="25%" valign="top">
 
-### 🔍 Full Site Audit
-
-Technical health, content quality, schema markup, Core Web Vitals, local SEO, AI search readiness, and backlinks — all analyzed in parallel by specialist agents.
-
-Delivers a **scored health report**, a prioritized fix plan grouped by urgency, and an **interactive HTML dashboard** ready to hand to a client.
-
-</td>
-<td width="33%" valign="top">
-
-### ✍️ Ranked Content
-
-Brief → research → outline → write → quality-score → deliver. Every article goes through a **5-gate preflight** — structure, prose, visuals, SEO, and a minimum **90/100 quality score**.
-
-Below threshold it rewrites itself — up to 3 iterations — before it ever reaches you.
+**Technical**
+- Crawlability & indexability
+- Redirects & canonical tags
+- robots.txt & sitemap gaps
+- HTTPS & security headers
+- JavaScript rendering (CSR vs SSR)
 
 </td>
-<td width="33%" valign="top">
+<td width="25%" valign="top">
 
-### 📅 Content Strategy
+**Content & On-Page**
+- E-E-A-T signals
+- Thin & duplicate content
+- Heading hierarchy
+- Readability scoring
+- Internal linking gaps
 
-Turn one audit into a full content operation. Topic clusters, keyword opportunity maps, hub-and-spoke architecture, and a **90-day editorial calendar** — all built from your audit findings, not guesswork.
+</td>
+<td width="25%" valign="top">
+
+**Performance**
+- Core Web Vitals (LCP, INP, CLS)
+- Above-fold rendering
+- Mobile responsiveness
+- Screenshot capture
+- Layout shift detection
+
+</td>
+<td width="25%" valign="top">
+
+**Schema & Structure**
+- JSON-LD detection & validation
+- Google-supported type check
+- Schema generation
+- Sitemap analysis
+- Hreflang validation
 
 </td>
 </tr>
 <tr>
+<td width="25%" valign="top">
+
+**Local SEO**
+- Google Business Profile audit
+- NAP consistency
+- Citation analysis
+- Review signals
+- Geo-grid rank tracking
+
+</td>
+<td width="25%" valign="top">
+
+**GEO & AI Search**
+- AI Overviews readiness
+- ChatGPT & Perplexity signals
+- llms.txt compliance
+- Passage-level citability
+- AI crawler accessibility
+
+</td>
+<td width="25%" valign="top">
+
+**Backlinks & Authority**
+- Moz, Bing & Common Crawl data
+- Link quality scoring
+- Competitor gap analysis
+- Toxic link detection
+- Anchor text diversity
+
+</td>
+<td width="25%" valign="top">
+
+**Deliverables**
+- `health-score.json` (0–100)
+- `fix-plan.md` (Critical → Low)
+- `client-audit-report.html`
+  ↳ action planner + score
+  ↳ copy-paste dev assets
+
+</td>
+</tr>
+</table>
+
+---
+
+### ✍️ Content — Research to Delivery
+
+One conversation. Fully automated from research through quality-gated delivery.
+
+<table>
+<tr>
+<td width="25%" valign="top">
+
+**Research**
+- 8–12 sourced statistics
+- Tier 1–3 source only
+- SERP competitor analysis
+- PAA question mining
+- Stock images sourced
+
+</td>
+<td width="25%" valign="top">
+
+**Writing**
+- 12 content templates
+- Answer-first formatting
+- E-E-A-T signals built in
+- Citation capsules
+- Information gain markers
+
+</td>
+<td width="25%" valign="top">
+
+**Quality Gates (5)**
+- Structure & placeholders
+- Prose & anti-AI patterns
+- Visual audit & alt text
+- SEO check (title, meta, schema)
+- Score ≥ 90/100 required
+
+</td>
+<td width="25%" valign="top">
+
+**Deliverables**
+- `article.md` (full source)
+- `article.html` (rendered)
+- `article.pdf`
+- `hero.<ext>` (cover image)
+- `preflight-report.json`
+
+</td>
+</tr>
+</table>
+
+---
+
+### 📅 Strategy — Audit Findings to Content Plan
+
+<table>
+<tr>
 <td width="33%" valign="top">
 
-### 🤖 Any AI Agent
-
-Works with Claude, Gemini, GPT, or any future tool — through natural conversation, not locked slash commands. A shared state file tracks every session so any agent picks up exactly where the last one stopped.
+**Topic Clustering**
+- SERP-based keyword grouping
+- Hub-and-spoke architecture
+- Pillar + supporting article map
+- Internal link matrix
+- Cannibalization detection
 
 </td>
 <td width="33%" valign="top">
 
-### 🔒 Fully Local
-
-Everything runs on your machine. Client data never leaves. No subscriptions, no per-seat pricing. The system builds memory across sessions — client 10 benefits from everything learned on clients 1 through 9.
+**Editorial Calendar**
+- 90-day week-by-week schedule
+- 60/30/10 content mix
+- Content decay detection
+- Seasonal hook mapping
+- Freshness update plan
 
 </td>
 <td width="33%" valign="top">
 
-### ⚡ One Command Setup
+**Keyword Research**
+- Semantic keyword expansion
+- Intent classification
+- Difficulty & volume estimates
+- Competitor gap analysis
+- `keyword-opportunity-map.md`
 
-Clone, run `install.ps1`, and you're ready. Python venv, Playwright, and all dependencies handled automatically. When skill versions update, `update.ps1` syncs them without touching your data or config.
+</td>
+</tr>
+</table>
+
+---
+
+### 🤖 &nbsp; 🔒 &nbsp; ⚡ Platform
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+**Any AI Agent**
+Works with Claude, Gemini, GPT, or any future tool — through natural conversation. A shared state file means any agent picks up exactly where the last one stopped.
+
+</td>
+<td width="33%" valign="top">
+
+**Fully Local**
+Client data never leaves your machine. No subscriptions, no per-seat pricing. Cross-session memory builds — client 10 benefits from everything learned on clients 1 through 9.
+
+</td>
+<td width="33%" valign="top">
+
+**One Command Setup**
+Clone, run `install.ps1`, ready. Python venv, Playwright, and all dependencies handled. `update.ps1` syncs new skill versions without touching your data or config.
 
 </td>
 </tr>
