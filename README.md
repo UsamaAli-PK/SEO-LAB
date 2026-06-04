@@ -1,44 +1,24 @@
 # SEO Lab
 
-**The AI-powered SEO system that audits, strategizes, and writes — while you sleep.**
+A complete SEO and content system built for AI agents. Audit any website, build content strategy, and write ranked articles — all from a single folder that works with Claude, Gemini, or any AI tool you use.
 
 Built by [Usama Ali](https://www.linkedin.com/in/usamaalipk/)
 
 ---
 
-## Your competitors are already using AI for SEO. Are you keeping up?
+## What It Does
 
-Most SEO tools give you a dashboard and leave you to figure it out.
+**Full-site SEO audits** — drop in a URL and get a complete technical breakdown: crawlability, content quality, schema markup, Core Web Vitals, local SEO, AI search readiness, and backlinks — all analyzed in parallel. Deliverables include a scored health report, a prioritized fix plan, and an interactive HTML dashboard you can hand straight to a client.
 
-SEO Lab is different. It's a complete AI-driven engine that goes from *"here's a website"* to *"here's the ranked content"* — automatically, on your machine, for any client, in any industry.
+**SEO-optimized content** — brief, research, outline, write, and quality-score a full article in one flow. Every piece goes through a 5-gate delivery check before it reaches you: structure, prose, visuals, SEO validation, and a minimum 90/100 quality score. Below that threshold, it rewrites itself.
 
-No subscriptions. No data leaving your machine. No agency markups. Just results.
+**Content strategy** — turn audit findings into a 90-day editorial plan. Topic clusters, keyword opportunity maps, hub-and-spoke architecture, and a publishing calendar built from real search data.
 
----
-
-## What SEO Lab Does For You
-
-### 🔍 Know Exactly What's Killing Your Rankings
-
-Drop in any URL. SEO Lab runs a deep multi-dimensional audit — technical health, content quality, schema markup, Core Web Vitals, local SEO, AI search readiness, backlinks — all at once, in parallel. You get a **scored report, a prioritized fix list, and an interactive client dashboard** ready to present.
-
-Not another vague "your page speed needs improvement." Specific. Numbered. Ranked by impact.
-
-### ✍️ Content That Actually Ranks
-
-SEO Lab doesn't just tell you what to write — it writes it. Research, outline, draft, quality-score, and deliver a complete article in one command. Every piece goes through a **5-gate quality contract** before it reaches you — structure, prose, visuals, SEO validation, and a minimum 90/100 quality score. If it doesn't pass, it doesn't ship.
-
-### 📅 A Strategy That Builds Authority Over Time
-
-Turn one audit into a 90-day content machine. SEO Lab maps out topic clusters, finds keyword opportunities your competitors are missing, and builds an editorial calendar — so you're not just fixing today's problems, you're building tomorrow's rankings.
-
-### 🤖 Works With Any AI Agent — Claude, Gemini, or Whatever Comes Next
-
-This isn't locked to one AI tool. Open the folder in Claude Code, Gemini CLI, or any future agent — it reads one file, knows exactly where you left off, and picks up from there. Switch AI tools mid-project. Resume after weeks away. Hand off between assistants. The system always knows what's next.
+**Multi-agent memory** — the system tracks progress in a single state file any AI agent can read. Switch from Claude to Gemini mid-project, resume after a break, or hand off to a teammate — it always knows exactly where you left off and what comes next.
 
 ---
 
-## Get Started in 60 Seconds
+## Get Started
 
 ```powershell
 git clone https://github.com/UsamaAli-PK/SEO-LAB.git
@@ -46,65 +26,65 @@ cd SEO-LAB
 .\install.ps1
 ```
 
-Then open your AI agent of choice in this folder and type:
+Open your AI agent in this folder, then:
 
 ```
 /seo audit https://yoursite.com
 ```
 
-That's it. Your first full audit is running.
+---
+
+## Commands
+
+### Audit
+| Command | What it does |
+|---------|-------------|
+| `/seo audit <url>` | Full parallel site audit |
+| `/seo technical <url>` | Crawlability, redirects, canonicals |
+| `/seo content <url>` | E-E-A-T, readability, thin content |
+| `/seo schema <url>` | Schema detection and generation |
+| `/seo local <url>` | GBP, citations, local pack |
+| `/seo geo <url>` | AI Overviews and GEO readiness |
+| `/seo performance <url>` | Core Web Vitals (LCP, INP, CLS) |
+| `/seo cluster <keyword>` | Topic cluster architecture |
+
+### Content
+| Command | What it does |
+|---------|-------------|
+| `/seo write-blog <keyword>` | Full article with 5-gate delivery |
+| `/seo write-page <topic>` | Landing page content |
+| `/seo content-plan <url>` | 90-day editorial calendar |
+| `/seo keyword-research <seed>` | Keyword opportunity map |
+| `/blog brand init` | Set brand voice for a client |
 
 ---
 
-## What You Get
+## How It Works
 
-| | SEO Lab |
-|---|---------|
-| Full site SEO audit | ✅ Technical, content, schema, performance, local, AI-readiness |
-| Scored client dashboard | ✅ Interactive HTML — action planner, fix guides, copy snippets |
-| AI-written blog articles | ✅ Research → write → 5-gate QA → deliver |
-| Content strategy | ✅ Keyword maps, topic clusters, 90-day calendar |
-| Any AI agent | ✅ Claude, Gemini, GPT — all share the same state |
-| Your data, your machine | ✅ Nothing uploaded, nothing shared |
-| One-time setup | ✅ `install.ps1` handles everything |
-| Always current | ✅ `update.ps1` pulls the latest improvements |
+Every session starts by reading `.planning/STATE.md` — a plain file that records what's been done, what's active, and what comes next. Any agent picks up from exactly that point. No re-explaining context, no starting over.
+
+Audits run up to 14 specialist agents in parallel, each writing a structured report to its own file. A validation gate checks all required outputs exist before scoring begins. Results roll up into a health score, a fix plan, and a client-ready HTML dashboard — all in `Projects/<domain>/`.
+
+Content goes through a research phase (8–12 sourced statistics, images, charts), a structured writing phase following the FLOW evidence framework, and an automated 5-gate preflight before delivery. If any gate fails, it iterates — up to 3 times — before escalating to you.
+
+Everything stays local. Client data never leaves your machine.
 
 ---
 
-## Built For People Who Deliver Results
+## Keeping It Current
 
-Whether you're an SEO freelancer, a content agency, or an in-house team — SEO Lab removes the bottleneck between *finding problems* and *shipping content that fixes them.*
+When new skill versions release:
 
-The system remembers every audit, every article, every insight — so client #10 benefits from everything you learned on clients 1 through 9.
-
----
-
-## Quick Command Reference
-
-**Audit a site:**
-```
-/seo audit https://yoursite.com
-```
-
-**Write a ranked article:**
-```
-/seo write-blog "target keyword"
-```
-
-**Build a content calendar:**
-```
-/seo content-plan https://yoursite.com
-```
-
-**Keep everything updated:**
 ```powershell
 .\update.ps1
 ```
 
+Your audits, content, state, and configuration are never touched — only the underlying skills update.
+
 ---
 
-## Open Source — MIT License
+## License
 
-Built by [Usama Ali](https://www.linkedin.com/in/usamaalipk/) · [LinkedIn](https://www.linkedin.com/in/usamaalipk/)
+MIT — [Usama Ali](https://www.linkedin.com/in/usamaalipk/)
 
-SEO skills powered by [claude-seo](https://github.com/AgriciDaniel/claude-seo) and [claude-blog](https://github.com/AgriciDaniel/claude-blog) — MIT License.
+Powered by [claude-seo](https://github.com/AgriciDaniel/claude-seo) and [claude-blog](https://github.com/AgriciDaniel/claude-blog), both MIT licensed.
